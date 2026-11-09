@@ -1,0 +1,43 @@
+{
+  "is_anomaly": false,
+  "anomaly_type": "none",
+  "mathematical_justification": [
+    {
+      "metric_id": "bill_total",
+      "calculated_value": "$157.72"
+    },
+    {
+      "metric_id": "previous_bill",
+      "calculated_value": "$140.58"
+    },
+    {
+      "metric_id": "bill_change",
+      "calculated_value": "+$17.14"
+    },
+    {
+      "metric_id": "march_kwh",
+      "calculated_value": "936.0 kWh"
+    },
+    {
+      "metric_id": "daily_change",
+      "calculated_value": "+3.4%"
+    },
+    {
+      "metric_id": "feb_days",
+      "calculated_value": "28"
+    },
+    {
+      "metric_id": "march_days",
+      "calculated_value": "31"
+    }
+  ],
+  "peer_comparison_status": "typical",
+  "recommended_plan": null,
+  "headline": "The higher bill coincided with a modest increase in daily use.",
+  "explanation": "The bill was {{bill_total}}, up from {{previous_bill}} by {{bill_change}}. March use was {{march_kwh}}, and average daily use rose {{daily_change}} versus February. The billing period was {{march_days}} days rather than {{feb_days}}, so both the longer period and higher daily use are consistent with the increase. No measured anomaly was flagged, and the usage pattern does not identify a specific cause.",
+  "actions": [
+    "Review changes in occupancy, schedules, or seasonal equipment use that may explain the higher daily demand.",
+    "Monitor daily use on the next bill to see whether the increase continues."
+  ],
+  "needs_review": false
+}

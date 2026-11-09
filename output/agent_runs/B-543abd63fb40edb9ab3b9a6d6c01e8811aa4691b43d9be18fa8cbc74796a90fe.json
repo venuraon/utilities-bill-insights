@@ -1,0 +1,83 @@
+{
+  "analysis": {
+    "is_anomaly": false,
+    "anomaly_type": "none",
+    "mathematical_justification": [
+      {
+        "metric_id": "bill_total",
+        "calculated_value": "$178.63"
+      },
+      {
+        "metric_id": "previous_bill",
+        "calculated_value": "$129.53"
+      },
+      {
+        "metric_id": "bill_change",
+        "calculated_value": "+$49.10"
+      },
+      {
+        "metric_id": "daily_change",
+        "calculated_value": "+27.1%"
+      },
+      {
+        "metric_id": "feb_days",
+        "calculated_value": "28"
+      },
+      {
+        "metric_id": "march_days",
+        "calculated_value": "31"
+      },
+      {
+        "metric_id": "weather_residual",
+        "calculated_value": "+5.1%"
+      },
+      {
+        "metric_id": "peer_difference",
+        "calculated_value": "63.8%"
+      },
+      {
+        "metric_id": "peer_kwh",
+        "calculated_value": "575.5 kWh"
+      },
+      {
+        "metric_id": "peer_count",
+        "calculated_value": "12"
+      },
+      {
+        "metric_id": "best_plan",
+        "calculated_value": "Evening Flex"
+      },
+      {
+        "metric_id": "best_plan_total",
+        "calculated_value": "$154.03"
+      },
+      {
+        "metric_id": "plan_savings",
+        "calculated_value": "$24.60"
+      }
+    ],
+    "peer_comparison_status": "above",
+    "recommended_plan": {
+      "plan_id": "tou",
+      "estimated_bill": "154.03",
+      "savings": "24.6",
+      "reason": "{{best_plan}} is the lowest-cost registered option for identical March usage, saving {{plan_savings}}."
+    },
+    "headline": "Higher usage; a lower-cost registered plan is available",
+    "explanation": "The bill rose from {{previous_bill}} to {{bill_total}} ({{bill_change}}); daily usage increased {{daily_change}}. The periods were {{feb_days}} days in February and {{march_days}} days in March. Usage is above peers, whose average was {{peer_kwh}} across {{peer_count}} homes, by {{peer_difference}}. Weather association points to heating, but the model extrapolates beyond its training range; its unexplained residual is {{weather_residual}}, so weather is not a proven cause. No anomaly was flagged.",
+    "actions": [
+      "Review heating schedules and thermostat settings to understand the usage increase.",
+      "Compare the {{best_plan}} time-of-use schedule with your household routine before switching."
+    ],
+    "needs_review": false
+  },
+  "email": {
+    "subject": "A closer look at your energy options",
+    "intro": "Explore a plan that may fit",
+    "explanation": "Weather may have contributed, but it isn\u2019t confirmed; compare the available plan with your routine before deciding.",
+    "actions": [
+      "Review {{best_plan}} against your household routine before switching."
+    ]
+  },
+  "model": "gpt-6-luna"
+}

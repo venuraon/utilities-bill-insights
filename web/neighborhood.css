@@ -1,0 +1,16 @@
+
+.neighborhood-panel{margin:18px 0 0;background:#fbfcf8}
+#neighborhood-content .neighborhood-panel{margin:0 0 18px}
+.neighborhood-panel h2{font:24px/1.3 Georgia,serif;margin:7px 0 12px}
+.neighborhood-insight{font-size:15px;max-width:850px;color:var(--ink)}
+.benchmark-bars{margin:19px 0}
+.benchmark-row{display:grid;grid-template-columns:155px minmax(70px,1fr) 105px;gap:16px;align-items:center;margin:12px 0;font-size:12px}
+.benchmark-track{height:13px;background:#e8ede1;border-radius:3px;overflow:hidden}
+.benchmark-fill{height:100%;border-radius:3px}
+.your-home{background:#347765}
+.nearby-homes{background:#a3b492}
+.benchmark-row strong{text-align:right;font-weight:500;font-variant-numeric:tabular-nums}
+.neighborhood-panel .fine-print{margin:12px 0 0}
+.email-content .neighborhood-panel{padding:20px;margin:24px 0}
+.email-content .benchmark-row{grid-template-columns:130px minmax(40px,1fr) 95px;gap:10px;font-size:11px}
+@media(max-width:720px){.benchmark-row,.email-content .benchmark-row{grid-template-columns:1fr 95px;gap:7px}.benchmark-row>span{grid-column:1/-1}.benchmark-track{grid-column:1}.neighborhood-panel h2{font-size:22px}}

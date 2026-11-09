@@ -1,0 +1,11 @@
+__pycache__/
+.venv/
+.env
+.DS_Store
+node_modules/
+recording.md
+RECORDING.md
+interview-notes.md
+take-home.md
+problem-statement.md
+

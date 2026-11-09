@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Juniper Electric · Explain the bill before the call</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#193d31;color:#253b2f;font:18px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.slide{display:none;min-height:100vh;padding:5vh 7vw 110px;background:#f6f7f0;position:relative}.slide.active{display:flex;flex-direction:column;justify-content:center}.eyebrow{font-size:12px;letter-spacing:2px;color:#607157;font-weight:700}h1{font:clamp(36px,4.1vw,62px)/1.1 Georgia,serif;letter-spacing:-1.5px;margin:18px 0 20px;max-width:1100px}h2{font:26px/1.25 Georgia,serif;margin:8px 0 12px}p{max-width:1100px;margin:0 0 14px;color:#53634f}.lead{font-size:22px;max-width:1050px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin:16px 0}.three{grid-template-columns:repeat(3,1fr);gap:25px}.card{border-top:1px solid #c5d2bb;padding-top:18px}.stat{font:clamp(44px,5vw,68px)/1.1 Georgia,serif;color:#285f47;display:block;margin:0 0 8px}.metric-label{font-size:17px;max-width:440px}.note,.source{font-size:13px;line-height:1.45;color:#65745d}.source{margin-top:10px}.source a{text-underline-offset:3px}.pill{display:inline-block;background:#dfe9d4;color:#34633d;border-radius:30px;padding:4px 12px;font-size:12px;font-weight:650}.flow{display:flex;align-items:stretch;gap:9px;margin:16px 0 20px}.step{flex:1;background:#e9efdf;border:1px solid #d4dfc9;padding:16px 13px;border-radius:8px;font-size:16px;min-width:0}.step strong{display:block;margin-bottom:6px;color:#254e3b}.step small{font-size:13px;line-height:1.4;display:block;color:#5f7055}.arrow{align-self:center;color:#7a8c6c}.before{font-size:17px;border-left:3px solid #b5bdad;padding-left:15px;margin:10px 0 16px}.button{display:inline-block;background:#254e3b;color:#fff;padding:12px 22px;text-decoration:none;border-radius:5px;margin:7px 0}.footer{position:absolute;bottom:31px;left:7vw;right:7vw;display:flex;justify-content:space-between;font-size:12px;color:#66765d;padding-right:190px;gap:20px}nav{position:fixed;bottom:20px;right:25px;z-index:3;display:flex;gap:8px;align-items:center}button{border:1px solid #bac7af;border-radius:5px;padding:8px 16px;cursor:pointer;background:#fff;color:#254e3b;font:13px sans-serif}button:focus-visible,a:focus-visible{outline:3px solid #c47e49;outline-offset:4px}button:disabled{opacity:.4;cursor:default}nav a{font-size:13px;padding:8px}a{color:#285f47}ul{padding-left:20px;margin:8px 0}li{margin-bottom:10px;color:#53634f}.evidence{padding:13px 16px;border-radius:8px;background:#e9efdf;margin-top:16px}.evidence strong{color:#254e3b}.formula{font-size:17px;color:#285f47}.checklist{font-size:16px}.route{font-size:16px}.mobile-note{display:none}
+@media(max-width:800px){.slide{padding:35px 6vw 130px}.grid,.three{grid-template-columns:1fr;gap:16px}.flow{flex-wrap:wrap}.step{flex-basis:28%;min-width:130px}.lead{font-size:19px}h1{letter-spacing:-.5px}.footer{bottom:75px;left:6vw;right:6vw;padding-right:0}.source{font-size:12px}}
+@media print{@page{size:landscape;margin:0}body{background:white;font-size:15px}.slide{display:flex!important;flex-direction:column;justify-content:center;width:100%;height:100vh;min-height:0;padding:4vh 6vw 65px;break-after:page;page-break-after:always;overflow:hidden}.slide:last-of-type{break-after:auto;page-break-after:auto}h1{font-size:40px;margin:12px 0 16px}.stat{font-size:50px}.lead{font-size:18px}.grid{margin:12px 0;gap:25px}.card{padding-top:12px}.footer{bottom:20px;padding-right:0}nav{display:none}.source{font-size:11px}.step{padding:12px;font-size:14px}li{margin-bottom:7px}}
+.context-grid{grid-template-columns:1fr 1fr minmax(220px,.8fr);gap:28px}.impact-chart svg{display:block;width:100%;max-width:265px;height:auto}.impact-chart p{margin:3px 0;font-size:13px}.impact-chart strong{color:#285f47}.flow-key{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;font-weight:700;color:#53634f}.flow-key span:before{content:'';display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:5px;vertical-align:-1px}.key-input:before{background:#a9cbe5}.key-code:before{background:#b7d6af}.key-llm:before{background:#cbb8df}.step--input{background:#e9f2f9;border-color:#a9cbe5}.step--code{background:#eaf3e7;border-color:#b7d6af}.step--llm{background:#f2ecf8;border-color:#cbb8df}.step--mixed{background:linear-gradient(135deg,#f2ecf8 50%,#eaf3e7 50%);border-color:#c4cbb9}.step .kind{font-size:10px;letter-spacing:.5px;text-transform:uppercase;font-weight:700;margin-bottom:8px;color:#526653}.synthetic-box{border:1px solid #d4dfc9;background:#fff;border-radius:8px;padding:10px 15px;margin:2px 0 12px;font-size:14px;color:#53634f}.synthetic-box strong{color:#254e3b}.workflow-slide .flow{margin:9px 0 12px}.workflow-slide .lead{margin-bottom:7px}.workflow-slide .before{margin-bottom:8px}
+@media(max-width:800px){.context-grid{grid-template-columns:1fr}.impact-chart svg{max-width:230px}}
+@media print{.context-grid{grid-template-columns:1fr 1fr minmax(200px,.8fr)}.impact-chart svg{max-width:220px}.synthetic-box{padding:7px 12px;margin-bottom:7px}.workflow-slide .flow{margin:7px 0 9px}}
+.architecture h1{font-size:clamp(34px,3.5vw,52px);margin:10px 0}.architecture .arch-subtitle{font-size:15px;margin-bottom:9px}.arch-trigger{font-size:13px;padding:7px 12px;background:#254e3b;color:#fff;border-radius:6px;margin-bottom:10px}.arch-row{display:flex;align-items:stretch;gap:7px}.arch-node{flex:1;min-width:0;background:#fff;border:1px solid #c8d7c3;border-radius:7px;padding:9px 10px;font-size:12px;line-height:1.3;color:#53634f}.arch-node strong{display:block;font-size:14px;color:#254e3b;margin-bottom:4px}.arch-node small{font-size:11px;color:#607157}.arch-node.input{background:#e9f2f9;border-color:#a9cbe5}.arch-node.compute{background:#eaf3e7;border-color:#b7d6af}.arch-node.llm{background:#f2ecf8;border-color:#cbb8df}.arch-node.mixed{background:linear-gradient(135deg,#f2ecf8 50%,#eaf3e7 50%);border-color:#c4cbb9}.arch-arrow{align-self:center;color:#6d806a;font-size:18px}.arch-down{font-size:14px;color:#607157;margin:4px 0;text-align:center}.arch-output{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:9px}.arch-controls{font-size:12px;line-height:1.4;margin:9px 0 3px}.arch-sources{font-size:11px;line-height:1.35;margin:3px 0}.arch-sources a{margin-right:8px}
+@media(max-width:800px){.architecture .arch-row{flex-wrap:wrap}.architecture .arch-node{flex-basis:28%;min-width:135px}.arch-output{grid-template-columns:1fr}}
+@media print{.architecture h1{font-size:34px;margin:5px 0 8px}.architecture .arch-node{padding:6px 7px;font-size:10px}.architecture .arch-node strong{font-size:12px}.architecture .arch-node small,.architecture .arch-sources{font-size:9px}.architecture .arch-controls{font-size:10px;margin:6px 0 2px}.architecture .arch-trigger{padding:5px 10px;margin-bottom:6px;font-size:11px}}
+</style>
+</head>
+<body>
+<section class="slide active" aria-label="Slide 1: Customer, industry and problem">
+<span class="eyebrow">JUNIPER ELECTRIC · ENERGY &amp; UTILITIES</span>
+<h1>Explain the bill.<br>Before the customer calls.</h1>
+<p class="lead">A fictional Mesa utility earns revenue through monthly, metered electricity bills. Its service team wants fewer avoidable bill-explanation calls.</p>
+<div class="grid context-grid">
+ <div class="card"><span class="stat">34%</span><p class="metric-label">Rise in reported monthly residential electric costs, 2020–2025, in J.D. Power’s study.</p><p class="source"><a href="https://www.jdpower.com/business/press-releases/2025-us-electric-utility-residential-customer-satisfaction-study" target="_blank" rel="noopener">J.D. Power · 2025 residential utility study ↗</a></p></div>
+ <div class="card"><span class="stat">128.8m</span><p class="metric-label">U.S. residential advanced meters in 2025. Interval data creates an opportunity for better explanations.</p><p class="source"><a href="https://www.eia.gov/electricity/annual/table.php?t=epa_10_05.html" target="_blank" rel="noopener">EIA · Electric Power Annual, Table 10.05 · 2025 ↗</a></p></div>
+ <div class="card impact-chart"><strong>Impact vs. complexity</strong><svg viewBox="0 0 260 155" role="img" aria-labelledby="impact-title impact-desc"><title id="impact-title">Impact and complexity assessment</title><desc id="impact-desc">The use case is assessed as high impact and medium complexity.</desc><path d="M42 18V116H234" fill="none" stroke="#788d79" stroke-width="1.5"/><path d="M42 67H234M138 18V116" fill="none" stroke="#d9e2d4" stroke-dasharray="3 4"/><text x="2" y="17" font-size="11" fill="#53634f">Impact</text><text x="9" y="36" font-size="10" fill="#65745d">High</text><text x="12" y="116" font-size="10" fill="#65745d">Low</text><text x="42" y="130" font-size="10" fill="#65745d">Low</text><text x="119" y="130" font-size="10" fill="#65745d">Medium</text><text x="212" y="130" font-size="10" fill="#65745d">High</text><text x="100" y="148" font-size="11" fill="#53634f">Complexity →</text><circle cx="138" cy="33" r="8" fill="#285f47" stroke="#fff" stroke-width="3"/></svg><p><strong>High impact · medium complexity</strong><br>Illustrative assessment</p></div>
+</div>
+<p class="note">Public industry context. Juniper, its billing-call problem, and all household data are fictional; these sources do not establish Juniper’s call volume or potential savings.</p>
+<div class="footer"><span>Prepared by Venu Nagineni · Public context, synthetic demo</span><span>01 / 06</span></div>
+</section>
+<section class="slide workflow-slide" aria-label="Slide 2: Current and improved workflow, selected OpenAI surface">
+<span class="eyebrow">ONE WORKFLOW · OPENAI PLATFORM AND APIs</span>
+<h1>Turn a reactive investigation<br>into a proactive explanation.</h1>
+<p class="before"><strong>Today:</strong> Invoice arrives → customer calls → representative investigates → explanation</p>
+<div class="flow-key" aria-label="Workflow color key"><span class="key-input">Input</span><span class="key-code">Deterministic</span><span class="key-llm">LLM-driven</span></div>
+<div class="flow" aria-label="Improved workflow">
+ <div class="step step--input"><span class="kind">Input</span><strong>1 · Billing inputs</strong><small>Usage, rate plan, shared weather, aggregate peers</small></div><span class="arrow" aria-hidden="true">→</span>
+ <div class="step step--code"><span class="kind">Deterministic</span><strong>2 · Python evidence</strong><small>Exact bills, daily changes, anomaly flags, plan costs</small></div><span class="arrow" aria-hidden="true">→</span>
+ <div class="step step--llm"><span class="kind">LLM-driven</span><strong>3 · Bill analyst</strong><small>Interpret the concise summary; return structured findings</small></div><span class="arrow" aria-hidden="true">→</span>
+ <div class="step step--code"><span class="kind">Deterministic</span><strong>4 · Validation</strong><small>Check facts and plan selection; hold unsupported findings</small></div><span class="arrow" aria-hidden="true">→</span>
+ <div class="step step--mixed"><span class="kind">LLM + deterministic</span><strong>5 · Customer preview</strong><small>Email agent captions + trusted Python charts and guidance</small></div>
+</div>
+<div class="synthetic-box"><strong>Synthetic demo data:</strong> 5 fictional Mesa homes · 90 days (Jan–Mar 2026) · readings every 5 minutes · 3 monthly invoices per home · 3 fictional rate plans · shared weather and similar-size peers</div>
+<p style="font-size:17px;font-weight:700;color:#254e3b;background:#e1edda;border-left:4px solid #4c8054;border-radius:5px;padding:10px 15px;align-self:flex-start">Used Codex to plan-build-review the application demo</p>
+<p class="lead">OpenAI Agents SDK for Python · Structured Outputs · OpenAI models</p>
+<p class="note">LLMs receive summaries, never raw five-minute sequences. Normal cases use a calculated snapshot and skip the email-agent call. No email is sent.</p>
+<div class="footer"><span>Current demo model: gpt-6-luna · Single selected product surface</span><span>02 / 06</span></div>
+</section>
+<section class="slide" aria-label="Slide 3: Demonstration flow">
+<span class="eyebrow">LIVE WALKTHROUGH · SAVED LOCAL RESULTS</span>
+<h1>One unexpected bill.<br>Evidence, meaning, action.</h1>
+<div class="grid">
+ <div class="card"><span class="pill">Primary story · Home C</span><h2>$110.08 → $253.02</h2><p>A sustained minimum-demand increase begins March 8. Show the invoice, usage evidence, similar-size neighbors, and the visual explanation.</p></div>
+ <div class="card"><span class="pill">Two quick contrasts</span><h2>Useful advice for different homes</h2><p><strong>Home D:</strong> A mid-month step; Home Value would have cost $16.66 less for the same March readings.</p><p><strong>Home A:</strong> Daily use is up 4.1%; no material anomaly. A simple snapshot is enough.</p></div>
+</div>
+<div><a class="button" href="demo.html#home=C&amp;view=invoice" target="_blank" rel="noopener">Open the demo viewer ↗</a></div>
+<p class="note">Five synthetic homes · Jan–Mar 2026 · Five-minute readings · Three fictional plans. Observed patterns support possible causes, not device diagnoses.</p>
+<p class="source">Demo evidence: <a href="data/semantic_summaries.json" target="_blank" rel="noopener">Calculated household summaries ↗</a></p>
+<div class="footer"><span>Same Mesa weather for every home · Retrospective plan comparisons</span><span>03 / 06</span></div>
+</section>
+<section class="slide" aria-label="Slide 4: Expected value and evaluation evidence">
+<span class="eyebrow">BUSINESS VALUE · HYPOTHESIS AND EVIDENCE</span>
+<h1>Free service capacity.<br>Measure whether customers benefit.</h1>
+<div class="grid">
+ <div class="card"><span class="pill">Illustrative scenario</span><span class="stat">133 hours</span><p class="metric-label">Potential support capacity freed per month.</p><p class="formula">10,000 billing calls × 10% avoided × 8 minutes ÷ 60</p><p class="note">Assumptions, not measured savings. Net value includes model costs, review effort, and integration costs.</p></div>
+ <div class="card"><h2>Pilot scorecard</h2><ul class="checklist"><li>Billing contacts per 1,000 bills versus a comparison cohort</li><li>Factual accuracy and customer helpfulness</li><li>Cost per explanation and staff review time</li></ul><div class="evidence"><strong>10/10 saved Luna workflow passes</strong><br><span class="note">Five synthetic homes × two repetitions. Python checks + LLM semantic judge. Development-set evidence; production impact remains unmeasured.</span></div></div>
+</div>
+<p class="source">Saved quality evidence: <a href="../evals/results/20261106T183728Z-live-5a4bef/report.html" target="_blank" rel="noopener">Luna evaluation · checks-v2 · gpt-6.1-sol judge ↗</a></p>
+<div class="footer"><span>Customer clarity is the goal; call reduction is a pilot hypothesis.</span><span>04 / 06</span></div>
+</section>
+<section class="slide" aria-label="Slide 5: Assumptions, constraints, governance and next steps">
+<span class="eyebrow">PRACTICAL LIMITS · CONTROLLED NEXT STEP</span>
+<h1>Start with staff-reviewed drafts.<br>Earn the right to scale.</h1>
+<div class="grid three">
+ <div class="card"><h2>Assumptions</h2><ul class="checklist"><li>Synthetic homes, weather and tariffs; simple energy charges + fixed fees</li><li>Demo plans assumed eligible; real meter frequency and tariff rules vary</li></ul></div>
+ <div class="card"><h2>Controls and constraints</h2><ul class="checklist"><li>Least-privilege household access and agreed retention; aggregate peers only</li><li>Peers match size ±20%; occupancy is unknown. Weather association does not prove cause</li></ul></div>
+ <div class="card"><h2>Next billing cycle</h2><ul class="checklist"><li>Validate real data, tariff eligibility and drafts with billing operations</li><li>Pilot one cohort against a comparison group; measure before expanding</li></ul></div>
+</div>
+<p class="lead">Proposed next step: a measured pilot with the customer-service director and billing operations.</p>
+<p class="note">Unsupported findings go to staff review. This demo previews communications; it sends no email and changes no customer plan.</p>
+<div class="footer"><span>Prepared by Venu Nagineni · OpenAI Platform and APIs</span><span>05 / 06</span></div>
+</section>
+<section class="slide architecture" aria-label="Slide 6: Proposed AWS production architecture">
+<span class="eyebrow">PROPOSED PRODUCTION ARCHITECTURE · AWS + OPENAI ON BEDROCK</span>
+<h1>From meter data to billing insights.</h1>
+<p class="arch-subtitle">Asynchronous batch processing · stages execute in order; households process in parallel</p>
+<div class="arch-trigger"><strong>Monthly billing-cycle trigger:</strong> EventBridge Scheduler → AWS Step Functions orchestrates, tracks and retries each stage.</div>
+<div class="arch-row" aria-label="Data preparation pipeline">
+ <div class="arch-node input"><strong>Meter + utility data</strong>5-minute readings, bills, tariffs, customer / peer data and weather</div><span class="arch-arrow" aria-hidden="true">→</span>
+ <div class="arch-node input"><strong>Amazon S3 · raw</strong>Land and partition incoming data; preserve original records</div><span class="arch-arrow" aria-hidden="true">→</span>
+ <div class="arch-node compute"><strong>AWS Glue · prepare</strong>Validate, deduplicate, align intervals and join inputs; quarantine bad records</div><span class="arch-arrow" aria-hidden="true">→</span>
+ <div class="arch-node input"><strong>Amazon S3 · curated</strong>Versioned, billing-cycle-ready data and processing manifest</div>
+</div>
+<div class="arch-down">↓ &nbsp; Prepared data starts the billing insights workflow</div>
+<div class="arch-row" aria-label="Five-stage billing insights workflow">
+ <div class="arch-node input"><strong>1 · Inputs</strong>Load curated household, tariff, weather and peer data</div><span class="arch-arrow" aria-hidden="true">→</span>
+ <div class="arch-node compute"><strong>2 · Evidence</strong>Python on AWS Batch: bills, anomalies, peers and plan comparisons → S3 summaries</div><span class="arch-arrow" aria-hidden="true">→</span>
+ <div class="arch-node llm"><strong>3 · Analyst</strong>Bedrock batch job #1: OpenAI gpt-oss interprets summary → S3 results</div><span class="arch-arrow" aria-hidden="true">→</span>
+ <div class="arch-node compute"><strong>4 · Validate</strong>Check schema, facts and eligibility; route failures for staff review</div><span class="arch-arrow" aria-hidden="true">→</span>
+ <div class="arch-node mixed"><strong>5 · Customer insight</strong>Bedrock batch job #2 drafts copy; Python validates and renders charts</div>
+</div>
+<div class="arch-output"><div class="arch-node"><strong>Approved output → customer channel</strong>Store versioned insights in S3; deliver via approved email or portal workflow.</div><div class="arch-node"><strong>Exceptions → operations review</strong>Quarantine failed records, retry safely and route unresolved cases to a review queue.</div></div>
+<p class="arch-controls"><strong>Across all stages:</strong> IAM least privilege · KMS encryption · PII minimization and retention · idempotency and replay · CloudWatch metrics / alarms · model, prompt and result versions · human approval before sending.</p>
+<p class="arch-sources">Design references: <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference.html">Bedrock batch inference ↗</a><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference-supported.html">Supported models and Regions ↗</a><a href="https://docs.aws.amazon.com/step-functions/latest/dg/using-eventbridge-scheduler.html">Scheduled orchestration ↗</a> Select a supported model and Region; validate output before use. This architecture is proposed, not deployed.</p>
+<div class="footer"><span>Prepared by Venu Nagineni · Production architecture proposal</span><span>06 / 06</span></div>
+</section>
+<nav aria-label="Slide navigation"><a href="demo.html">Demo ↗</a><button id="previous" aria-label="Previous slide">←</button><button id="next" aria-label="Next slide">→</button></nav>
+<script>
+const slides=[...document.querySelectorAll('.slide')];let current=0;
+function show(n){current=Math.max(0,Math.min(slides.length-1,n));slides.forEach((s,i)=>{s.classList.toggle('active',i===current);s.setAttribute('aria-hidden',String(i!==current))});document.getElementById('previous').disabled=current===0;document.getElementById('next').disabled=current===slides.length-1;history.replaceState(null,'','#'+(current+1))}
+document.getElementById('previous').onclick=()=>show(current-1);document.getElementById('next').onclick=()=>show(current+1);
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='PageDown'){e.preventDefault();show(current+1)}if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();show(current-1)}});
+show((Number(location.hash.slice(1))||1)-1);
+</script>
+</body></html>

@@ -1,0 +1,13 @@
+{
+  "mode": "live",
+  "analytics_seconds": 1.396,
+  "summary_bytes_by_home": {
+    "A": 2678,
+    "B": 2693,
+    "C": 2775,
+    "D": 2765,
+    "E": 2692
+  },
+  "configured_max_concurrent_homes": 2,
+  "note": "Byte sizes measure serialized summaries, not billed tokens. Sample/cached modes make no model calls."
+}

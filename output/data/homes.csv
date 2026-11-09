@@ -1,0 +1,6 @@
+id,sqft,plan,heating,heat_sensitivity_kw
+A,900,flat_a,electric,0.008
+B,1300,flat_a,electric,0.11
+C,1800,tou,electric,0.012
+D,2400,tou,electric,0.014
+E,3000,flat_b,electric,0.016

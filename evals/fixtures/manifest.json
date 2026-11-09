@@ -1,0 +1,16 @@
+{
+  "snapshot_version": 1,
+  "created_utc": "2026-11-06",
+  "description": "Frozen five-home semantic summaries, prompts, schemas, and validation functions. No raw telemetry. Expected review decisions and semantic guidance are curated for these complete synthetic cases.",
+  "sources": {
+    "utility_demo/agents.py": "77c5c7c7e690f59c74ffecc3f607bbd25911ba36f54c1b6c125be2500448306c",
+    "utility_demo/models.py": "981887ecc9db0c32aa33fafbf517172a7a54cf404bc7ea39304c064b5220db23",
+    "output/data/semantic_summaries.json": "ce0db60a6a6447513da425a4899555245cfb0cf7ace583876258ebc8d8d7475b"
+  },
+  "files": {
+    "contract.py": "3dacd9039e9aa5476a7f7a457712668729990eb28411157da306b6557de0129c",
+    "schemas.py": "3bbdfbc27613572eff97f5416488f5dacc5eea1754b5229f359812ef32d11b4c",
+    "fixtures/cases.json": "b384bbef049f32925a4a4b2aabe4d6755a46dd2ad2cef2327bd836d8e4ec1268",
+    "fixtures/prompts.json": "2865553e5e0b9c5008c6d822b528455255b8f8a000ec27e75a3d88a583b36292"
+  }
+}

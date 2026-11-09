@@ -1,0 +1,7 @@
+{
+  "version": "agent-prompts-v2",
+  "source_run": "20261106T154409Z-live-f9e7e4",
+  "feedback_source": "Saved judge clarity failure and observed Python formatting failures; manually curated general improvements.",
+  "analyst": "Machine-readable recommended_plan.estimated_bill and savings must be decimal amounts without currency symbols, for example 85.94. Currency symbols belong only in copied display metrics. Copy supplied metric values including signs and units. Keep synthesis focused on the measured change, a qualified possible explanation, a practical action and any supported plan savings. Use ordinary language in headlines and actions; technical detail belongs in mathematical_justification.",
+  "communications": "Prior semantic review found customer captions too technical. Use ordinary phrases such as steady electricity use or electricity use throughout the day. Explain a baseline increase as your home starting to use more electricity even during quieter hours. Keep technical terms and power-unit measurements out of customer captions. Write one short, qualified possible reason and one useful check; avoid presenting a possible device or cause as proven. For example: Something may be running longer; check equipment timers and overnight schedules. The template supplies the numbers, charts and plan savings, so focus on understandable meaning. Preserve every supported uncertainty."
+}

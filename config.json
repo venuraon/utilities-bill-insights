@@ -1,0 +1,31 @@
+{
+  "utility": "Juniper Electric",
+  "locality": "Mesa, Arizona",
+  "timezone": "America/Phoenix",
+  "model": "gpt-6-luna",
+  "max_concurrent_homes": 2,
+  "seed": 42,
+  "start_date": "2026-01-01",
+  "days": 90,
+  "neighborhood": {"homes": 60, "min_sqft": 800, "max_sqft": 3400, "size_tolerance_pct": 20, "minimum_peers": 3},
+  "analytics": {"degree_day_base_f": 64.4, "constant_draw_increase_kw": 1.2, "step_increase_kw": 0.4, "minimum_signal_days": 3, "material_residual_pct": 20},
+  "plans": [
+    {"id": "flat_a", "name": "Everyday Fixed", "off_peak_rate": 0.18, "peak_rate": 0.18, "monthly_fee": 9.0},
+    {"id": "flat_b", "name": "Home Value", "off_peak_rate": 0.145, "peak_rate": 0.145, "monthly_fee": 22.0},
+    {"id": "tou", "name": "Evening Flex", "off_peak_rate": 0.11, "peak_rate": 0.31, "monthly_fee": 12.0}
+  ],
+  "peak_start_hour": 16,
+  "peak_end_hour": 21,
+  "homes": [
+    {"id": "A", "sqft": 900, "plan": "flat_a", "heating": "electric", "heat_sensitivity_kw": 0.008},
+    {"id": "B", "sqft": 1300, "plan": "flat_a", "heating": "electric", "heat_sensitivity_kw": 0.11},
+    {"id": "C", "sqft": 1800, "plan": "tou", "heating": "electric", "heat_sensitivity_kw": 0.012},
+    {"id": "D", "sqft": 2400, "plan": "tou", "heating": "electric", "heat_sensitivity_kw": 0.014},
+    {"id": "E", "sqft": 3000, "plan": "flat_b", "heating": "electric", "heat_sensitivity_kw": 0.016}
+  ],
+  "injections": [
+    {"home": "C", "start": "2026-03-08", "extra_kw": 1.6, "kind": "continuous"},
+    {"home": "D", "start": "2026-03-15", "extra_kw": 2.4, "kind": "evening", "start_hour": 18, "end_hour": 21},
+    {"home": "D", "start": "2026-03-15", "extra_kw": 0.65, "kind": "continuous"}
+  ]
+}

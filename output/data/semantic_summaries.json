@@ -1,0 +1,596 @@
+[
+  {
+    "schema_version": "hybrid-v2-fahrenheit",
+    "home": {
+      "id": "A",
+      "sqft": 900,
+      "heating": "electric",
+      "plan": "flat_a"
+    },
+    "locality": "Mesa, Arizona",
+    "period": "2026-03",
+    "billing": {
+      "total_kwh": "457.278865",
+      "bill_total": "91.31",
+      "current_plan": "flat_a",
+      "previous_bill": "80.43",
+      "bill_change": "10.88",
+      "daily_usage_change_pct": 4.0947,
+      "current_days": 31,
+      "previous_days": 28
+    },
+    "peer_group": {
+      "count": 7,
+      "size_band_sqft": [
+        720,
+        1080
+      ],
+      "average_monthly_kwh": 484.369,
+      "stddev_kwh": 38.456691,
+      "relative_variance_pct": -5.6,
+      "z_score": -0.7044,
+      "status": "typical"
+    },
+    "weather": {
+      "base_temperature_f": 64.4,
+      "degree_day_unit": "\u00b0F\u00b7days",
+      "heating_degree_days": 256.752,
+      "cooling_degree_days": 25.848,
+      "temperature_usage_correlation": -0.7021,
+      "heating_usage_correlation": 0.7098,
+      "cooling_usage_correlation": -0.1946,
+      "historical_fit_r_squared": 0.1109,
+      "historical_fit_days": 59,
+      "expected_kwh": 451.098327,
+      "unexplained_kwh": 6.180538,
+      "unexplained_pct": 1.37,
+      "association": "not_evident",
+      "temperature_outside_training_range": true
+    },
+    "anomalies": {
+      "is_anomaly": false,
+      "primary_type": "none",
+      "high_constant_minimum_draw": false,
+      "constant_draw_days": 0,
+      "historical_minimum_kw": 0.2645,
+      "current_minimum_kw": 0.2872,
+      "baseline_step": false,
+      "step_date": null,
+      "step_increase_kw": null,
+      "step_threshold_kw": 0.4,
+      "weekday_peak_shift": false,
+      "peak_shift_days": 0,
+      "signal_start": null,
+      "signal_days": 0
+    },
+    "plan_options": [
+      {
+        "plan_id": "tou",
+        "plan_name": "Evening Flex",
+        "total": 85.94,
+        "savings": 5.37
+      },
+      {
+        "plan_id": "flat_b",
+        "plan_name": "Home Value",
+        "total": 88.31,
+        "savings": 3.0
+      },
+      {
+        "plan_id": "flat_a",
+        "plan_name": "Everyday Fixed",
+        "total": 91.31,
+        "savings": 0.0
+      }
+    ],
+    "metrics": {
+      "bill_total": "$91.31",
+      "previous_bill": "$80.43",
+      "bill_change": "+$10.88",
+      "march_kwh": "457.3 kWh",
+      "daily_change": "+4.1%",
+      "baseline_night": "0.33 kW",
+      "march_night": "0.34 kW",
+      "feb_days": "28",
+      "march_days": "31",
+      "feb_temp": "60.9 \u00b0F",
+      "march_temp": "57.0 \u00b0F",
+      "best_plan": "Evening Flex",
+      "best_plan_total": "$85.94",
+      "plan_savings": "$5.37",
+      "home_intensity": "0.508 kWh/sq ft",
+      "minimum_draw": "0.29 kW",
+      "baseline_step": "0.00 kW",
+      "weather_residual": "+1.4%",
+      "peer_intensity": "0.522 kWh/sq ft",
+      "peer_count": "7",
+      "peer_size_range": "720\u20131,080 sq ft",
+      "peer_kwh": "484.4 kWh",
+      "peer_difference": "5.6%",
+      "peer_direction": "lower",
+      "peer_z_score": "-0.70"
+    },
+    "limits": [
+      "Synthetic data and tariffs; demo plans assumed eligible.",
+      "Peer matching does not control for occupancy or equipment.",
+      "Weather association is not proof of cause; extrapolation is explicitly flagged.",
+      "Meter patterns cannot identify an appliance, leak or stuck HVAC valve."
+    ]
+  },
+  {
+    "schema_version": "hybrid-v2-fahrenheit",
+    "home": {
+      "id": "B",
+      "sqft": 1300,
+      "heating": "electric",
+      "plan": "flat_a"
+    },
+    "locality": "Mesa, Arizona",
+    "period": "2026-03",
+    "billing": {
+      "total_kwh": "942.343255",
+      "bill_total": "178.63",
+      "current_plan": "flat_a",
+      "previous_bill": "129.53",
+      "bill_change": "49.10",
+      "daily_usage_change_pct": 27.1191,
+      "current_days": 31,
+      "previous_days": 28
+    },
+    "peer_group": {
+      "count": 12,
+      "size_band_sqft": [
+        1040,
+        1560
+      ],
+      "average_monthly_kwh": 575.476,
+      "stddev_kwh": 42.802066,
+      "relative_variance_pct": 63.8,
+      "z_score": 8.5712,
+      "status": "above"
+    },
+    "weather": {
+      "base_temperature_f": 64.4,
+      "degree_day_unit": "\u00b0F\u00b7days",
+      "heating_degree_days": 256.752,
+      "cooling_degree_days": 25.848,
+      "temperature_usage_correlation": -0.9863,
+      "heating_usage_correlation": 0.9909,
+      "cooling_usage_correlation": -0.3224,
+      "historical_fit_r_squared": 0.8857,
+      "historical_fit_days": 59,
+      "expected_kwh": 896.970276,
+      "unexplained_kwh": 45.372979,
+      "unexplained_pct": 5.058,
+      "association": "heating",
+      "temperature_outside_training_range": true
+    },
+    "anomalies": {
+      "is_anomaly": false,
+      "primary_type": "none",
+      "high_constant_minimum_draw": false,
+      "constant_draw_days": 0,
+      "historical_minimum_kw": 0.3439,
+      "current_minimum_kw": 0.6352,
+      "baseline_step": false,
+      "step_date": null,
+      "step_increase_kw": null,
+      "step_threshold_kw": 0.4,
+      "weekday_peak_shift": false,
+      "peak_shift_days": 1,
+      "signal_start": null,
+      "signal_days": 0
+    },
+    "plan_options": [
+      {
+        "plan_id": "tou",
+        "plan_name": "Evening Flex",
+        "total": 154.03,
+        "savings": 24.6
+      },
+      {
+        "plan_id": "flat_b",
+        "plan_name": "Home Value",
+        "total": 158.64,
+        "savings": 19.99
+      },
+      {
+        "plan_id": "flat_a",
+        "plan_name": "Everyday Fixed",
+        "total": 178.63,
+        "savings": 0.0
+      }
+    ],
+    "metrics": {
+      "bill_total": "$178.63",
+      "previous_bill": "$129.53",
+      "bill_change": "+$49.10",
+      "march_kwh": "942.3 kWh",
+      "daily_change": "+27.1%",
+      "baseline_night": "1.03 kW",
+      "march_night": "1.20 kW",
+      "feb_days": "28",
+      "march_days": "31",
+      "feb_temp": "60.9 \u00b0F",
+      "march_temp": "57.0 \u00b0F",
+      "best_plan": "Evening Flex",
+      "best_plan_total": "$154.03",
+      "plan_savings": "$24.60",
+      "home_intensity": "0.725 kWh/sq ft",
+      "minimum_draw": "0.64 kW",
+      "baseline_step": "0.00 kW",
+      "weather_residual": "+5.1%",
+      "peer_intensity": "0.444 kWh/sq ft",
+      "peer_count": "12",
+      "peer_size_range": "1,040\u20131,560 sq ft",
+      "peer_kwh": "575.5 kWh",
+      "peer_difference": "63.8%",
+      "peer_direction": "higher",
+      "peer_z_score": "8.57"
+    },
+    "limits": [
+      "Synthetic data and tariffs; demo plans assumed eligible.",
+      "Peer matching does not control for occupancy or equipment.",
+      "Weather association is not proof of cause; extrapolation is explicitly flagged.",
+      "Meter patterns cannot identify an appliance, leak or stuck HVAC valve."
+    ]
+  },
+  {
+    "schema_version": "hybrid-v2-fahrenheit",
+    "home": {
+      "id": "C",
+      "sqft": 1800,
+      "heating": "electric",
+      "plan": "tou"
+    },
+    "locality": "Mesa, Arizona",
+    "period": "2026-03",
+    "billing": {
+      "total_kwh": "1616.117365",
+      "bill_total": "253.02",
+      "current_plan": "tou",
+      "previous_bill": "110.08",
+      "bill_change": "142.94",
+      "daily_usage_change_pct": 141.9562,
+      "current_days": 31,
+      "previous_days": 28
+    },
+    "peer_group": {
+      "count": 16,
+      "size_band_sqft": [
+        1440,
+        2160
+      ],
+      "average_monthly_kwh": 666.464,
+      "stddev_kwh": 72.462759,
+      "relative_variance_pct": 142.5,
+      "z_score": 13.1054,
+      "status": "above"
+    },
+    "weather": {
+      "base_temperature_f": 64.4,
+      "degree_day_unit": "\u00b0F\u00b7days",
+      "heating_degree_days": 256.752,
+      "cooling_degree_days": 25.848,
+      "temperature_usage_correlation": 0.072,
+      "heating_usage_correlation": -0.0039,
+      "cooling_usage_correlation": 0.5626,
+      "historical_fit_r_squared": 0.0309,
+      "historical_fit_days": 59,
+      "expected_kwh": 678.197666,
+      "unexplained_kwh": 937.919699,
+      "unexplained_pct": 138.296,
+      "association": "decoupled",
+      "temperature_outside_training_range": true
+    },
+    "anomalies": {
+      "is_anomaly": true,
+      "primary_type": "constant_draw",
+      "high_constant_minimum_draw": true,
+      "constant_draw_days": 24,
+      "historical_minimum_kw": 0.4012,
+      "current_minimum_kw": 1.6759,
+      "baseline_step": true,
+      "step_date": "2026-03-08",
+      "step_increase_kw": 1.6237,
+      "step_threshold_kw": 0.4,
+      "weekday_peak_shift": true,
+      "peak_shift_days": 17,
+      "signal_start": "2026-03-08",
+      "signal_days": 24
+    },
+    "plan_options": [
+      {
+        "plan_id": "tou",
+        "plan_name": "Evening Flex",
+        "total": 253.02,
+        "savings": 0.0
+      },
+      {
+        "plan_id": "flat_b",
+        "plan_name": "Home Value",
+        "total": 256.33,
+        "savings": -3.31
+      },
+      {
+        "plan_id": "flat_a",
+        "plan_name": "Everyday Fixed",
+        "total": 299.9,
+        "savings": -46.88
+      }
+    ],
+    "metrics": {
+      "bill_total": "$253.02",
+      "previous_bill": "$110.08",
+      "bill_change": "+$142.94",
+      "march_kwh": "1,616.1 kWh",
+      "daily_change": "+142.0%",
+      "baseline_night": "0.50 kW",
+      "march_night": "1.76 kW",
+      "feb_days": "28",
+      "march_days": "31",
+      "feb_temp": "60.9 \u00b0F",
+      "march_temp": "57.0 \u00b0F",
+      "best_plan": "Evening Flex",
+      "best_plan_total": "$253.02",
+      "plan_savings": "$0.00",
+      "home_intensity": "0.898 kWh/sq ft",
+      "minimum_draw": "1.68 kW",
+      "baseline_step": "1.62 kW",
+      "weather_residual": "+138.3%",
+      "peer_intensity": "0.374 kWh/sq ft",
+      "peer_count": "16",
+      "peer_size_range": "1,440\u20132,160 sq ft",
+      "peer_kwh": "666.5 kWh",
+      "peer_difference": "142.5%",
+      "peer_direction": "higher",
+      "peer_z_score": "13.11",
+      "signal_start": "Mar 8",
+      "signal_days": "24"
+    },
+    "limits": [
+      "Synthetic data and tariffs; demo plans assumed eligible.",
+      "Peer matching does not control for occupancy or equipment.",
+      "Weather association is not proof of cause; extrapolation is explicitly flagged.",
+      "Meter patterns cannot identify an appliance, leak or stuck HVAC valve."
+    ]
+  },
+  {
+    "schema_version": "hybrid-v2-fahrenheit",
+    "home": {
+      "id": "D",
+      "sqft": 2400,
+      "heating": "electric",
+      "plan": "tou"
+    },
+    "locality": "Mesa, Arizona",
+    "period": "2026-03",
+    "billing": {
+      "total_kwh": "1172.020719",
+      "bill_total": "208.60",
+      "current_plan": "tou",
+      "previous_bill": "128.80",
+      "bill_change": "79.80",
+      "daily_usage_change_pct": 47.4605,
+      "current_days": 31,
+      "previous_days": 28
+    },
+    "peer_group": {
+      "count": 22,
+      "size_band_sqft": [
+        1920,
+        2880
+      ],
+      "average_monthly_kwh": 806.135,
+      "stddev_kwh": 92.877322,
+      "relative_variance_pct": 45.4,
+      "z_score": 3.9394,
+      "status": "above"
+    },
+    "weather": {
+      "base_temperature_f": 64.4,
+      "degree_day_unit": "\u00b0F\u00b7days",
+      "heating_degree_days": 256.752,
+      "cooling_degree_days": 25.848,
+      "temperature_usage_correlation": 0.3546,
+      "heating_usage_correlation": -0.2802,
+      "cooling_usage_correlation": 0.7145,
+      "historical_fit_r_squared": 0.0321,
+      "historical_fit_days": 59,
+      "expected_kwh": 804.37918,
+      "unexplained_kwh": 367.641539,
+      "unexplained_pct": 45.705,
+      "association": "decoupled",
+      "temperature_outside_training_range": true
+    },
+    "anomalies": {
+      "is_anomaly": true,
+      "primary_type": "baseline_step",
+      "high_constant_minimum_draw": false,
+      "constant_draw_days": 0,
+      "historical_minimum_kw": 0.4765,
+      "current_minimum_kw": 0.8715,
+      "baseline_step": true,
+      "step_date": "2026-03-15",
+      "step_increase_kw": 0.5822,
+      "step_threshold_kw": 0.4,
+      "weekday_peak_shift": true,
+      "peak_shift_days": 12,
+      "signal_start": "2026-03-15",
+      "signal_days": 17
+    },
+    "plan_options": [
+      {
+        "plan_id": "flat_b",
+        "plan_name": "Home Value",
+        "total": 191.94,
+        "savings": 16.66
+      },
+      {
+        "plan_id": "tou",
+        "plan_name": "Evening Flex",
+        "total": 208.6,
+        "savings": 0.0
+      },
+      {
+        "plan_id": "flat_a",
+        "plan_name": "Everyday Fixed",
+        "total": 219.96,
+        "savings": -11.36
+      }
+    ],
+    "metrics": {
+      "bill_total": "$208.60",
+      "previous_bill": "$128.80",
+      "bill_change": "+$79.80",
+      "march_kwh": "1,172.0 kWh",
+      "daily_change": "+47.5%",
+      "baseline_night": "0.59 kW",
+      "march_night": "0.97 kW",
+      "feb_days": "28",
+      "march_days": "31",
+      "feb_temp": "60.9 \u00b0F",
+      "march_temp": "57.0 \u00b0F",
+      "best_plan": "Home Value",
+      "best_plan_total": "$191.94",
+      "plan_savings": "$16.66",
+      "home_intensity": "0.488 kWh/sq ft",
+      "minimum_draw": "0.87 kW",
+      "baseline_step": "0.58 kW",
+      "weather_residual": "+45.7%",
+      "peer_intensity": "0.336 kWh/sq ft",
+      "peer_count": "22",
+      "peer_size_range": "1,920\u20132,880 sq ft",
+      "peer_kwh": "806.1 kWh",
+      "peer_difference": "45.4%",
+      "peer_direction": "higher",
+      "peer_z_score": "3.94",
+      "signal_start": "Mar 15",
+      "signal_days": "17"
+    },
+    "limits": [
+      "Synthetic data and tariffs; demo plans assumed eligible.",
+      "Peer matching does not control for occupancy or equipment.",
+      "Weather association is not proof of cause; extrapolation is explicitly flagged.",
+      "Meter patterns cannot identify an appliance, leak or stuck HVAC valve."
+    ]
+  },
+  {
+    "schema_version": "hybrid-v2-fahrenheit",
+    "home": {
+      "id": "E",
+      "sqft": 3000,
+      "heating": "electric",
+      "plan": "flat_b"
+    },
+    "locality": "Mesa, Arizona",
+    "period": "2026-03",
+    "billing": {
+      "total_kwh": "935.991807",
+      "bill_total": "157.72",
+      "current_plan": "flat_b",
+      "previous_bill": "140.58",
+      "bill_change": "17.14",
+      "daily_usage_change_pct": 3.3706,
+      "current_days": 31,
+      "previous_days": 28
+    },
+    "peer_group": {
+      "count": 23,
+      "size_band_sqft": [
+        2400,
+        3600
+      ],
+      "average_monthly_kwh": 903.632,
+      "stddev_kwh": 97.616955,
+      "relative_variance_pct": 3.6,
+      "z_score": 0.3315,
+      "status": "typical"
+    },
+    "weather": {
+      "base_temperature_f": 64.4,
+      "degree_day_unit": "\u00b0F\u00b7days",
+      "heating_degree_days": 256.752,
+      "cooling_degree_days": 25.848,
+      "temperature_usage_correlation": -0.6882,
+      "heating_usage_correlation": 0.697,
+      "cooling_usage_correlation": -0.1817,
+      "historical_fit_r_squared": 0.0888,
+      "historical_fit_days": 59,
+      "expected_kwh": 923.348411,
+      "unexplained_kwh": 12.643396,
+      "unexplained_pct": 1.369,
+      "association": "not_evident",
+      "temperature_outside_training_range": true
+    },
+    "anomalies": {
+      "is_anomaly": false,
+      "primary_type": "none",
+      "high_constant_minimum_draw": false,
+      "constant_draw_days": 0,
+      "historical_minimum_kw": 0.5435,
+      "current_minimum_kw": 0.5881,
+      "baseline_step": false,
+      "step_date": null,
+      "step_increase_kw": null,
+      "step_threshold_kw": 0.4,
+      "weekday_peak_shift": false,
+      "peak_shift_days": 0,
+      "signal_start": null,
+      "signal_days": 0
+    },
+    "plan_options": [
+      {
+        "plan_id": "flat_b",
+        "plan_name": "Home Value",
+        "total": 157.72,
+        "savings": 0.0
+      },
+      {
+        "plan_id": "tou",
+        "plan_name": "Evening Flex",
+        "total": 163.22,
+        "savings": -5.5
+      },
+      {
+        "plan_id": "flat_a",
+        "plan_name": "Everyday Fixed",
+        "total": 177.48,
+        "savings": -19.76
+      }
+    ],
+    "metrics": {
+      "bill_total": "$157.72",
+      "previous_bill": "$140.58",
+      "bill_change": "+$17.14",
+      "march_kwh": "936.0 kWh",
+      "daily_change": "+3.4%",
+      "baseline_night": "0.67 kW",
+      "march_night": "0.70 kW",
+      "feb_days": "28",
+      "march_days": "31",
+      "feb_temp": "60.9 \u00b0F",
+      "march_temp": "57.0 \u00b0F",
+      "best_plan": "Home Value",
+      "best_plan_total": "$157.72",
+      "plan_savings": "$0.00",
+      "home_intensity": "0.312 kWh/sq ft",
+      "minimum_draw": "0.59 kW",
+      "baseline_step": "0.00 kW",
+      "weather_residual": "+1.4%",
+      "peer_intensity": "0.311 kWh/sq ft",
+      "peer_count": "23",
+      "peer_size_range": "2,400\u20133,600 sq ft",
+      "peer_kwh": "903.6 kWh",
+      "peer_difference": "3.6%",
+      "peer_direction": "higher",
+      "peer_z_score": "0.33"
+    },
+    "limits": [
+      "Synthetic data and tariffs; demo plans assumed eligible.",
+      "Peer matching does not control for occupancy or equipment.",
+      "Weather association is not proof of cause; extrapolation is explicitly flagged.",
+      "Meter patterns cannot identify an appliance, leak or stuck HVAC valve."
+    ]
+  }
+]

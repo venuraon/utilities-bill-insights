@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Juniper Electric · Bill clarity</title><style>__STYLE__</style></head>
+<body>
+<aside class="sidebar">
+  <a class="brand" href="#"><span class="brand-icon" aria-hidden="true">j.</span><span>juniper<span class="brand-sub">ELECTRIC</span></span></a>
+  <div class="workspace-label">BILLING WORKSPACE</div>
+  <div class="side-active"><span aria-hidden="true">◫</span> Bill clarity</div>
+  <p class="side-description">A clearer bill.<br>A better conversation.</p>
+  <div class="side-bottom"><span class="small-dot"></span> Local demo <p>Fictional residential utility<br>Mesa, Arizona</p><a href="slides.html">Presentation slides ↗</a></div>
+</aside>
+<div class="workspace">
+<header class="topbar"><span>Customer operations <span class="slash">/</span> Bill clarity</span><span class="top-label">SYNTHETIC DATA <span class="small-dot"></span> JAN–MAR 2026</span></header>
+<main>
+  <div class="page-heading"><div><span class="eyebrow">PROACTIVE BILL EXPLANATIONS</span><h1>Understand the change.</h1><p>The numbers behind the bill. The explanation your customer needs.</p></div><a id="email-link" class="button secondary" href="emails/C-2026-03.html" target="_blank" rel="noopener">Open customer email ↗</a></div>
+  <div id="mode-notice" class="mode-notice" role="status"></div>
+  <section class="home-switcher" aria-label="Select a demo household"><div><span class="eyebrow">HOUSEHOLD</span><div id="home-buttons" class="home-buttons"></div></div><div class="home-meta"><strong id="home-size"></strong><span id="home-plan"></span></div></section>
+  <section class="metrics-grid" aria-label="March summary" aria-live="polite">
+    <article class="metric-card"><span class="metric-label">MARCH BILL</span><strong id="bill-total"></strong><span id="bill-change"></span></article>
+    <article class="metric-card"><span class="metric-label">AVERAGE DAILY USAGE</span><strong id="daily-usage"></strong><span id="daily-change"></span></article>
+    <article class="metric-card insight-metric"><span class="metric-label">PATTERN CHECK</span><strong id="pattern-title"></strong><span id="pattern-caption"></span></article>
+  </section>
+  <div class="content-top"><nav class="tabs" aria-label="Bill explanation sections" role="tablist"><button id="tab-usage" role="tab" aria-controls="panel-usage" aria-selected="true" tabindex="0" data-tab="usage">01 <span>Usage & evidence</span></button><button id="tab-invoice" role="tab" aria-controls="panel-invoice" aria-selected="false" tabindex="-1" data-tab="invoice">02 <span>Monthly invoice</span></button><button id="tab-email" role="tab" aria-controls="panel-email" aria-selected="false" tabindex="-1" data-tab="email">03 <span>Insights email</span></button></nav><span class="period">MARCH 2026</span></div>
+  <section id="panel-usage" role="tabpanel" aria-labelledby="tab-usage" class="tab-panel">
+    <div id="neighborhood-content"></div>
+    <article class="panel chart-panel"><div class="panel-heading"><div><h2>A closer look at consumption</h2><p>Five-minute meter readings, aggregated by day.</p></div><span class="document-pill">90 DAYS</span></div><div class="legend"><span><i class="swatch green"></i>Daily usage</span><span><i class="swatch orange"></i>Above expected range</span><span><i class="swatch dashed"></i>Estimated usage for this home</span></div><div id="usage-chart" class="chart"></div><p class="chart-caption">Shaded region: March billing period. Dashed line: estimated electricity consumption for this home (kWh/day), fitted from past usage and the shared Mesa temperatures.</p></article>
+    <article class="panel weather-panel"><div class="panel-heading"><div><h2>Shared Mesa weather</h2><p>Daily mean temperature (°F) · identical for all five homes.</p></div><span class="document-pill">SAME LOCALITY</span></div><div id="weather-chart" class="chart"></div><p id="weather-response" class="weather-context"></p></article>
+    <div class="evidence-grid"><article class="panel finding-panel"><span class="eyebrow">WHAT THE EVIDENCE SUGGESTS</span><h2 id="finding-headline"></h2><p id="finding-body"></p><span id="finding-source" class="source-label"></span></article><article class="panel plan-panel"><span class="eyebrow">SAME USAGE, DIFFERENT PLAN</span><h2>Could a plan help?</h2><div id="plan-message"></div><div id="plan-list"></div><p class="fine-print">March readings repriced under fictional demo plans. Future savings and real eligibility may differ.</p></article></div>
+  </section>
+  <section id="panel-invoice" role="tabpanel" aria-labelledby="tab-invoice" class="tab-panel" hidden><div class="section-intro"><h2>The bill, line by line.</h2><p>Calculated directly from interval consumption and fictional tariff rates.</p></div><div id="invoice-content"></div><div class="invoice-links">Other statements: <a id="jan-link" href="#">January ↗</a><a id="feb-link" href="#">February ↗</a></div></section>
+  <section id="panel-email" role="tabpanel" aria-labelledby="tab-email" class="tab-panel" hidden><div class="section-intro"><h2>Clarity, delivered with the bill.</h2><p>A customer-facing preview. Saved locally; no email has been sent.</p></div><div id="email-content"></div></section>
+  <details class="presenter-notes"><summary>Behind this explanation <span>Workflow & assumptions</span></summary><div class="workflow"><span>Meter & tariff data</span><b>→</b><span>Semantic feature summary</span><b>→</b><span>Bill analyst</span><b>→</b><span>Reference validation</span><b>→</b><span>Email writer</span></div><p id="pipeline-note"></p><p><a href="data/semantic_summaries.json" target="_blank" rel="noopener">Feature summaries ↗</a> · <a id="analysis-link" href="analyses/C.json" target="_blank" rel="noopener">Analyst JSON ↗</a></p><p>Checks verify invoice arithmetic and metric references. They do not prove every interpretation is correct; a real pilot starts with staff-reviewed drafts. Appliance causes remain uncertain. Only aggregate peer context is passed to agents.</p></details>
+  <footer class="page-footer"><span>Juniper Electric · A fictional utility</span><span>Prepared by Venu Nagineni</span></footer>
+</main></div>
+<script id="demo-data" type="application/json">__DATA__</script><script>__SCRIPT__</script>
+</body></html>

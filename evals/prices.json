@@ -1,0 +1,16 @@
+{
+  "verified_on": "2026-11-06",
+  "source": "https://developers.openai.com/api/docs/pricing",
+  "service_tier": "default",
+  "currency": "USD",
+  "unit": "per_million_tokens",
+  "models": {
+    "gpt-6-luna": {"input": "0.10", "cached_input": "0.01", "output": "0.50", "cache_write": "0.25"},
+    "gpt-6.1-sol": {"input": "2.00", "cached_input": "0.10", "output": "10.00", "cache_write": "5.00"},
+    "gpt-6.1-terra": {"input": "1.00", "cached_input": "0.05", "output": "5.00", "cache_write": "2.50"},
+    "gpt-6-astra": {"input": "10.00", "cached_input": "1.00", "output": "50.00", "cache_write": "25.00"},
+    "gpt-5.4": {"input": "2.50", "cached_input": "0.25", "output": "15.00", "cache_write": "2.50"},
+    "gpt-5.4-mini": {"input": "0.75", "cached_input": "0.075", "output": "4.50", "cache_write": "0.75"},
+    "gpt-5.4-nano": {"input": "0.20", "cached_input": "0.02", "output": "1.25", "cache_write": "0.20"}
+  }
+}

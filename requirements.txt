@@ -1,0 +1,4 @@
+# Optional: only needed for --mode live or SDK integration tests.
+openai-agents>=0.6
+pydantic>=2.10,<3
+

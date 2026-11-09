@@ -1,0 +1,22 @@
+[
+  {
+    "home": "C",
+    "start": "2026-03-08",
+    "extra_kw": 1.6,
+    "kind": "continuous"
+  },
+  {
+    "home": "D",
+    "start": "2026-03-15",
+    "extra_kw": 2.4,
+    "kind": "evening",
+    "start_hour": 18,
+    "end_hour": 21
+  },
+  {
+    "home": "D",
+    "start": "2026-03-15",
+    "extra_kw": 0.65,
+    "kind": "continuous"
+  }
+]

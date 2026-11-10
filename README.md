@@ -1,6 +1,6 @@
-# Juniper Electric · Bill clarity demo
+# Coruscant Electric · Bill clarity demo
 
-This local demo explains monthly electricity bills for five fictional Mesa homes. It has three parts: generate the source data once, build customer insights from that saved data, and run independent evaluations.
+This local demo explains monthly electricity bills for five fictional Coruscant homes. It has three parts: generate the source data once, build customer insights from that saved data, and run independent evaluations.
 
 ## Project map
 

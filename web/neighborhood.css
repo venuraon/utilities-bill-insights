@@ -5,10 +5,10 @@
 .neighborhood-insight{font-size:15px;max-width:850px;color:var(--ink)}
 .benchmark-bars{margin:19px 0}
 .benchmark-row{display:grid;grid-template-columns:155px minmax(70px,1fr) 105px;gap:16px;align-items:center;margin:12px 0;font-size:12px}
-.benchmark-track{height:13px;background:#e8ede1;border-radius:3px;overflow:hidden}
+.benchmark-track{height:13px;background:#e1e7ed;border-radius:3px;overflow:hidden}
 .benchmark-fill{height:100%;border-radius:3px}
-.your-home{background:#347765}
-.nearby-homes{background:#a3b492}
+.your-home{background:#345677}
+.nearby-homes{background:#92a3b4}
 .benchmark-row strong{text-align:right;font-weight:500;font-variant-numeric:tabular-nums}
 .neighborhood-panel .fine-print{margin:12px 0 0}
 .email-content .neighborhood-panel{padding:20px;margin:24px 0}

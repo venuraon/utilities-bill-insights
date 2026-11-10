@@ -38,7 +38,7 @@ for(const report of reports){
   assert.ok(elements.get('home-size').textContent.includes(`Home ${id}`));
   assert.equal(report.weather_chart_html,reports[0].weather_chart_html);
   assert.equal(elements.get('weather-chart').innerHTML,report.weather_chart_html);
-  assert.ok(elements.get('weather-response').textContent.includes('Same Mesa weather'));
+  assert.ok(elements.get('weather-response').textContent.includes('Same Coruscant weather'));
   assert.equal(elements.get('bill-total').textContent,new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(report.invoice.total));
   assert.ok(elements.get('invoice-content').innerHTML.includes(`Home ${id}`));
   if(report.analysis.needs_review){

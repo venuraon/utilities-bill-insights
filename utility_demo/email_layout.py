@@ -11,16 +11,16 @@ from pathlib import Path
 
 BASE = '''
 .sample-note{padding:10px 18px;margin:0 auto 12px;background:#f3ebda;color:#7a5b2c;font:11px Arial,sans-serif;max-width:740px}
-.email-sheet{font-family:Arial,sans-serif;color:#21392f;background:#ffffff;border:1px solid #e2e7dd;border-radius:8px;overflow:hidden;margin:0 auto;line-height:1.6}
-.mail-meta{background:#fafbf7;border-bottom:1px solid #e2e7dd;display:flex;flex-direction:column;color:#737d72}
-.mail-meta strong{font-weight:500;color:#21392f}
-.eyebrow{font-size:10px;letter-spacing:1.6px;font-weight:700;color:#737d72}
+.email-sheet{font-family:Arial,sans-serif;color:#212d39;background:#ffffff;border:1px solid #dde2e7;border-radius:8px;overflow:hidden;margin:0 auto;line-height:1.6}
+.mail-meta{background:#fafbf7;border-bottom:1px solid #dde2e7;display:flex;flex-direction:column;color:#72787d}
+.mail-meta strong{font-weight:500;color:#212d39}
+.eyebrow{font-size:10px;letter-spacing:1.6px;font-weight:700;color:#72787d}
 '''
 
 
 def inline_email_styles(source):
     css = BASE + (Path(__file__).resolve().parents[1] / 'web' / 'email.css').read_text().split('@media')[0]
-    rules = [(selector.strip(), body.strip().replace('var(--line)', '#e2e7dd'))
+    rules = [(selector.strip(), body.strip().replace('var(--line)', '#dde2e7'))
              for selectors, body in re.findall(r'([^{}]+)\{([^{}]*)\}', css)
              for selector in selectors.split(',')]
 

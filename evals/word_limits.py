@@ -3,8 +3,9 @@ from .contract import EMAIL_WORD_LIMITS, resolve
 
 EMAIL_TARGETS = dict(EMAIL_WORD_LIMITS)
 ANALYST_TARGET = 120
-# Integer division rounds down: never allow more than twenty percent extra.
+# Integer division rounds down; the customer-facing intro has its own hard cap.
 EMAIL_HARD_LIMITS = {key: value * 120 // 100 for key, value in EMAIL_TARGETS.items()}
+EMAIL_HARD_LIMITS['intro'] = 11
 ANALYST_HARD_LIMIT = ANALYST_TARGET * 120 // 100
 
 

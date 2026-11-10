@@ -4,7 +4,7 @@ import json
 import re
 from decimal import Decimal
 
-POLICY_VERSION = 'checks-v3'
+POLICY_VERSION = 'checks-v5'
 
 
 def money_value(value):

@@ -1,0 +1,96 @@
+{
+  "analysis": {
+    "is_anomaly": true,
+    "anomaly_type": "baseline_step",
+    "mathematical_justification": [
+      {
+        "metric_id": "bill_total",
+        "calculated_value": "$208.60"
+      },
+      {
+        "metric_id": "bill_change",
+        "calculated_value": "+$79.80"
+      },
+      {
+        "metric_id": "daily_change",
+        "calculated_value": "+47.5%"
+      },
+      {
+        "metric_id": "feb_days",
+        "calculated_value": "28"
+      },
+      {
+        "metric_id": "march_days",
+        "calculated_value": "31"
+      },
+      {
+        "metric_id": "signal_start",
+        "calculated_value": "Mar 15"
+      },
+      {
+        "metric_id": "baseline_night",
+        "calculated_value": "0.59 kW"
+      },
+      {
+        "metric_id": "march_night",
+        "calculated_value": "0.97 kW"
+      },
+      {
+        "metric_id": "baseline_step",
+        "calculated_value": "0.58 kW"
+      },
+      {
+        "metric_id": "minimum_draw",
+        "calculated_value": "0.87 kW"
+      },
+      {
+        "metric_id": "weather_residual",
+        "calculated_value": "+45.7%"
+      },
+      {
+        "metric_id": "peer_count",
+        "calculated_value": "22"
+      },
+      {
+        "metric_id": "peer_kwh",
+        "calculated_value": "806.1 kWh"
+      },
+      {
+        "metric_id": "best_plan",
+        "calculated_value": "Home Value"
+      },
+      {
+        "metric_id": "best_plan_total",
+        "calculated_value": "$191.94"
+      },
+      {
+        "metric_id": "plan_savings",
+        "calculated_value": "$16.66"
+      }
+    ],
+    "peer_comparison_status": "above",
+    "recommended_plan": {
+      "plan_id": "flat_b",
+      "estimated_bill": "191.94",
+      "savings": "16.66",
+      "reason": "Repricing the same March usage on {{best_plan}} gives an estimated bill of {{best_plan_total}} and savings of {{plan_savings}}."
+    },
+    "headline": "March costs rose alongside a sustained baseline increase",
+    "explanation": "The bill was {{bill_total}}, up {{bill_change}}. Daily usage changed {{daily_change}} across {{feb_days}} February days and {{march_days}} March days. Usage rose after {{signal_start}}: nighttime demand increased from {{baseline_night}} to {{march_night}}, with a {{baseline_step}} baseline step and a minimum draw of {{minimum_draw}}. This suggests sustained extra demand, but its cause is unconfirmed. Weather leaves {{weather_residual}} unexplained; the fit is weak and March is outside its training range, so weather is not established as the cause. Usage was above the {{peer_count}} matched homes' average of {{peer_kwh}}; peer matching has limitations.",
+    "actions": [
+      "Check for schedule or equipment changes near {{signal_start}}.",
+      "Check equipment that may be running continuously; the meter pattern does not identify a specific device."
+    ],
+    "needs_review": false
+  },
+  "email": {
+    "subject": "A change in your energy use",
+    "intro": "A sustained increase appeared",
+    "explanation": "Nighttime demand rose after {{signal_start}}, suggesting extra ongoing use, though the cause remains unclear.",
+    "actions": [
+      "Review schedule or equipment changes near {{signal_start}}."
+    ]
+  },
+  "model": "gpt-6-luna",
+  "communications_source": "model"
+}

@@ -1,0 +1,51 @@
+{
+  "analysis": {
+    "is_anomaly": false,
+    "anomaly_type": "none",
+    "mathematical_justification": [
+      {
+        "metric_id": "bill_total",
+        "calculated_value": "$157.72"
+      },
+      {
+        "metric_id": "bill_change",
+        "calculated_value": "+$17.14"
+      },
+      {
+        "metric_id": "daily_change",
+        "calculated_value": "+3.4%"
+      },
+      {
+        "metric_id": "feb_days",
+        "calculated_value": "28"
+      },
+      {
+        "metric_id": "march_days",
+        "calculated_value": "31"
+      },
+      {
+        "metric_id": "weather_residual",
+        "calculated_value": "+1.4%"
+      }
+    ],
+    "peer_comparison_status": "typical",
+    "recommended_plan": null,
+    "headline": "Higher bill, with only a modest increase in daily use",
+    "explanation": "The bill was {{bill_total}}, up {{bill_change}}. Daily use rose {{daily_change}}, and the billing period grew from {{feb_days}} days to {{march_days}}. The weather-adjusted residual was {{weather_residual}}, but the historical weather fit is poor and March temperatures are outside its training range, so weather is not a reliable explanation. Peer usage is typical, and no anomaly is flagged. The current plan remains the lowest-cost registered option for these readings, so no switch is recommended.",
+    "actions": [
+      "Compare billed days and daily usage on your next bill with this period.",
+      "If daily use remains elevated, review heating schedules and thermostat settings."
+    ],
+    "needs_review": false
+  },
+  "email": {
+    "subject": "Your March electricity snapshot",
+    "intro": "Your monthly usage snapshot",
+    "explanation": "Average daily consumption changed {{daily_change}} compared with February.",
+    "actions": [
+      "Keep monitoring your usual usage."
+    ]
+  },
+  "model": "gpt-6-luna",
+  "communications_source": "deterministic_normal"
+}

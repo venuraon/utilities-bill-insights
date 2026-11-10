@@ -123,8 +123,9 @@ class FixtureAndScoringTests(unittest.TestCase):
         self.assertEqual(result['checks'], [])
         self.assertEqual(result['execution_status'], 'incomplete')
 
-    def test_email_hard_boundaries_allow_twenty_percent_with_integer_rounding(self):
-        self.assertEqual(EMAIL_HARD_LIMITS, {'subject': 9, 'intro': 8, 'explanation': 28, 'action': 16, 'body': 54})
+    def test_email_hard_boundaries_include_eleven_word_intro(self):
+        self.assertEqual(EMAIL_HARD_LIMITS, {'subject': 9, 'intro': 11, 'explanation': 28, 'action': 16, 'body': 54})
+        self.assertEqual(EMAIL_TARGETS['intro'], 7)
         case = self.cases['C']
         for field in ('subject', 'intro', 'explanation', 'action'):
             email = {'subject': 'Words', 'intro': 'Words', 'explanation': 'Words', 'actions': ['Words']}
@@ -160,8 +161,33 @@ class FixtureAndScoringTests(unittest.TestCase):
 
     def test_prompt_refinements_include_feedback_without_weakening_judge(self):
         self.assertIn('without currency symbols', self.prompts['analyst'])
+        self.assertIn('February had {{feb_days}} days and March had {{march_days}} days', self.prompts['analyst'])
+        self.assertIn('do not put peer_comparison_status there', self.prompts['analyst'])
+        self.assertIn('Include {{bill_change}} in either the headline or the explanation', self.prompts['analyst'])
+        self.assertIn('weather evidence is insufficient to determine its role', self.prompts['analyst'])
+        self.assertIn('not the percentage of total use that is unexplained', self.prompts['analyst'])
+        self.assertIn('do not interpret or attribute that percentage in prose', self.prompts['analyst'])
         self.assertIn('steady electricity use', self.prompts['communications'])
         self.assertIn('clarity:', JUDGE_PROMPT)
+
+    def test_analyst_rejects_unknown_evidence_and_missing_explanation_comparison(self):
+        case = self.cases['E']
+        output = copy.deepcopy(case['reference_analysis'])
+        output['mathematical_justification'].append({'metric_id': 'peer_comparison_status', 'calculated_value': 'typical'})
+        self.assertIn('evidence_values', [c['name'] for c in score(case, 'analyst', output)['checks'] if not c['passed']])
+        output = copy.deepcopy(case['reference_analysis'])
+        output['explanation'] = output['explanation'].replace('{{bill_change}}', 'higher')
+        output['headline'] = output['headline'].replace('{{bill_change}}', 'higher')
+        self.assertIn('billing_comparisons', [c['name'] for c in score(case, 'analyst', output)['checks'] if not c['passed']])
+
+    def test_bill_change_can_appear_in_headline_but_other_comparisons_remain_required(self):
+        case = self.cases['A']
+        output = copy.deepcopy(case['reference_analysis'])
+        output['explanation'] = output['explanation'].replace('{{bill_change}}', 'higher')
+        output['headline'] = 'Bill change: {{bill_change}}'
+        self.assertTrue(score(case, 'analyst', output)['passed'])
+        output['explanation'] = output['explanation'].replace('{{feb_days}}', 'fewer')
+        self.assertIn('billing_comparisons', [c['name'] for c in score(case, 'analyst', output)['checks'] if not c['passed']])
 
     def test_judge_is_blinded_and_has_resolved_placeholders(self):
         case = self.cases['D']
@@ -197,7 +223,7 @@ class FixtureAndScoringTests(unittest.TestCase):
 
 
 class BudgetTests(unittest.TestCase):
-    def test_authorized_two_dollar_limit_preserves_the_one_dollar_ledger(self):
+    def test_authorized_limits_preserve_the_existing_ledger(self):
         with tempfile.TemporaryDirectory() as temporary:
             folder = Path(temporary)
             entries = {'old': {'run_id': 'old-run', 'maximum_usd': '.2',
@@ -205,8 +231,9 @@ class BudgetTests(unittest.TestCase):
             save_json(folder / 'budget.json', {'limit_usd': '1.00', 'request_allowance_usd': '.90',
                                               'entries': entries})
             with Budget(folder) as budget:
-                self.assertEqual(budget.state['limit_usd'], '2.00')
-                self.assertEqual(budget.state['request_allowance_usd'], '1.90')
+                self.assertEqual(budget.state['limit_usd'], '4.00')
+                self.assertEqual(budget.state['request_allowance_usd'], '3.90')
+                self.assertEqual(budget.state['run_limit_usd'], '0.35')
                 self.assertEqual(budget.state['entries'], entries)
                 self.assertEqual(budget.committed, Decimal('.2'))
                 self.assertEqual(len(budget.state['limit_changes']), 1)
@@ -233,6 +260,16 @@ class BudgetTests(unittest.TestCase):
                 key, = budget.reserve('run', [Decimal('.1')])
                 budget.settle(key, None, sent=False)
                 self.assertEqual(budget.committed, 0)
+
+    def test_per_run_limit_is_separate_from_shared_limit(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            with Budget(Path(temporary)) as budget:
+                key, = budget.reserve('first', [Decimal('.30')])
+                budget.settle(key, Decimal('.25'))
+                with self.assertRaisesRegex(BudgetExceeded, 'per-evaluation'):
+                    budget.reserve('first', [Decimal('.11')])
+                budget.reserve('second', [Decimal('.11')])
+                self.assertEqual(budget.snapshot('first')['run_committed_usd'], '0.25')
 
     def test_observed_cost_overrun_stops_without_losing_accounting(self):
         with tempfile.TemporaryDirectory() as temporary:
@@ -280,8 +317,14 @@ class PipelineTests(unittest.TestCase):
         folder = Path(temporary)
         with Budget(folder) as budget:
             if pre_spend:
-                key, = budget.reserve('prior', [pre_spend])
-                budget.settle(key, pre_spend)
+                remaining = pre_spend
+                index = 0
+                while remaining:
+                    amount = min(remaining, Decimal('.30'))
+                    key, = budget.reserve(f'prior-{index}', [amount])
+                    budget.settle(key, amount)
+                    remaining -= amount
+                    index += 1
             harness = Harness(config, cases, prompts, manifest, folder / 'run', mode='live',
                               backend=backend, budget=budget, prices=load_prices(['gpt-6-luna']))
             asyncio.run(harness.run())
@@ -326,7 +369,7 @@ class PipelineTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             config = load_config()
             config.update(cases=['A'], repetitions=1)
-            summary, _, calls = self.run_harness(temporary, config=config, pre_spend=Decimal('1.899'))
+            summary, _, calls = self.run_harness(temporary, config=config, pre_spend=Decimal('3.899'))
             self.assertEqual(calls, [])
             self.assertEqual(summary['status'], 'partial')
             self.assertEqual(summary['workflows']['passed'], 0)
@@ -397,7 +440,7 @@ class PipelineTests(unittest.TestCase):
             self.assertEqual(result['new_api_calls'], 0)
             self.assertEqual(result['new_passes'], 1)
             rebuild_reports(root)
-            self.assertIn('accepted under checks-v3', (root / 'comparison.html').read_text())
+            self.assertIn('accepted under checks-v5', (root / 'comparison.html').read_text())
 
 
 class SDKTransportTests(unittest.IsolatedAsyncioTestCase):

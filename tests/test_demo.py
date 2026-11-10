@@ -129,6 +129,13 @@ class EndToEndTests(unittest.TestCase):
         ev = self.evidence['C']
         analysis, email = sample_outputs(ev)
         validate_analysis(analysis, ev)
+        headline_bill = copy.deepcopy(analysis)
+        headline_bill['explanation'] = headline_bill['explanation'].replace('{{bill_change}}', 'higher')
+        headline_bill['headline'] += ' {{bill_change}}'
+        validate_analysis(headline_bill, ev)
+        headline_bill['headline'] = headline_bill['headline'].replace('{{bill_change}}', '')
+        with self.assertRaisesRegex(ValueError, 'billing comparisons'):
+            validate_analysis(headline_bill, ev)
         validate_email(email, ev, analysis)
         self.assertIn(ev['metrics']['bill_total'], email_html({**ev, 'analysis': analysis, 'email': email, 'provenance': {'mode': 'sample'}}, self.config, ''))
         bad = copy.deepcopy(analysis)

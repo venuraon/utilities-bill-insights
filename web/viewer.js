@@ -68,7 +68,7 @@ function renderHome(id) {
     ? `Preview mode: agent steps have not executed. Both agents are configured for ${demo.model} using the OpenAI Agents SDK. Add an API key locally and run live mode to replace sample narratives.`
     : normal ? `The analyst found no fault-like anomaly. Short guidance and plan savings are derived from the validated weather, consumption and tariff features. ${r.provenance.communications_source === 'deterministic_normal' ? 'The communications call was skipped.' : 'Existing saved model copy is retained in the analyst artifacts.'}`
     : `Both agents used ${r.provenance.model} through the OpenAI Agents SDK. The saved model draft is retained; the possible-reason/next-step sentence is rule-based guidance from validated features. This viewer makes no API calls.`;
-  document.title = `Home ${id} · Bill clarity · Juniper Electric`;
+  document.title = `Home ${id} · Bill clarity · Coruscant Electric`;
   history.replaceState(null,'',`#home=${id}&view=${selectedTab}`);
 }
 

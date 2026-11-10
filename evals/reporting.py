@@ -206,7 +206,18 @@ def write_report(path, summaries):
             audit = json.loads(audit_file.read_text())
             href = ('../audits/' if path.parent.name == summary['run_id'] else 'audits/') + audit_file.stem + '.html'
             audit_note = f'<p><strong>Saved-output validation recheck:</strong> {audit["new_passes"]}/{audit["attempts"]} accepted under {escape(audit["policy_version"])}; {audit["unavailable"]} unavailable. <a href="{escape(href)}">See recheck details</a>. No new model calls or judge assessments; original scores below are preserved.</p>'
-        cards.append(f'''<article><p class="badge">{escape(label)}</p><h2>{escape(model)}</h2>
+        is_comparison = path.name == 'comparison.html'
+        if is_comparison:
+            heading = (f'<details class="evaluation-toggle" open><summary>'
+                       f'<span class="eval-heading"><strong>{escape(model)}</strong> '
+                       f'<span class="badge">{escape(label)}</span><br>'
+                       f'<span class="eval-meta">{escape(summary["run_id"])} · '
+                       f'{summary["workflows"]["passed"]}/{summary["workflows"]["requested"]} workflows passed</span>'
+                       f'</span></summary>')
+        else:
+            heading = f'<p class="badge">{escape(label)}</p><h2>{escape(model)}</h2>'
+        closing = '</details>' if is_comparison else ''
+        cards.append(f'''<article>{heading}
 <p>Judge: {escape(summary['judge_model'] or 'Not selected')} · {escape(summary['run_id'])}</p>
 <p>Scoring policy: {escape(summary.get('evaluation_policy_version', 'checks-v1'))}. Complete means the run finished; individual tests may have failed.</p>{audit_note}
 <div class="metrics"><div><strong>${escape(summary['cost']['usage_based_estimated_usd'])}</strong>Usage-based estimated cost</div>
@@ -221,7 +232,7 @@ def write_report(path, summaries):
 <p>Email repetitions measure factual compliance and semantic quality on each draft, not direct agreement in meaning between drafts.</p>
 <details open><summary>Failed attempts and causes</summary><table><thead><tr><th>Case</th><th>Test</th><th>Category</th><th>Reason</th></tr></thead><tbody>{failed or '<tr><td colspan="4">None recorded</td></tr>'}</tbody></table></details>
 <details open><summary>Judge feedback</summary><ul>{feedback or '<li>No failing semantic assessments recorded. Unscored responses were not judged.</li>'}</ul></details>
-<p><a href="{escape(target)}summary.json">Summary JSON</a> · <a href="{escape(target)}attempts.jsonl">All attempts and responses</a> · <a href="{escape(target)}run.json">Frozen inputs and configuration</a></p></article>''')
+<p><a href="{escape(target)}summary.json">Summary JSON</a> · <a href="{escape(target)}attempts.jsonl">All attempts and responses</a> · <a href="{escape(target)}run.json">Frozen inputs and configuration</a></p>{closing}</article>''')
     groups = {dumps(s['comparison_group']) for _, s in summaries if s['mode'] == 'live'}
     note = 'Runs have different inputs, judging, settings, or dependency versions; compare within matching groups.' if len(groups) > 1 else 'Compare models on matching datasets, prompts, judge, and settings. Judge assessments are separate from Python checks.'
     path.write_text('''<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -229,6 +240,7 @@ def write_report(path, summaries):
 body{font:16px/1.55 system-ui,sans-serif;background:#f3f6fa;color:#18314a;margin:0;padding:32px}main{max-width:1100px;margin:auto}
 h1{font-size:36px;letter-spacing:-1px}h2{margin:4px 0}.badge{font-size:12px;font-weight:700;color:#665000}
 article{background:white;border:1px solid #dce5ed;border-radius:16px;padding:24px;margin:24px 0;overflow:auto}
+.evaluation-toggle > summary{cursor:pointer;color:#123c66;font-size:20px;line-height:1.4}.evaluation-toggle > summary::marker{color:#1465ac}.evaluation-toggle > summary:focus-visible{outline:3px solid #1465ac;outline-offset:4px}.eval-heading{display:inline-block;vertical-align:top}.eval-heading .badge{margin-left:10px}.eval-meta{font-size:13px;font-weight:400;color:#53677b}
 .metrics{display:flex;flex-wrap:wrap;gap:32px;margin:24px 0}.metrics div{color:#53677b;font-size:14px}.metrics strong{display:block;color:#123c66;font-size:28px}
 table{width:100%;border-collapse:collapse;margin:24px 0}th,td{text-align:left;padding:10px;border-bottom:1px solid #e4ebf2}
 caption{text-align:left;font-weight:700;padding-bottom:8px}a{color:#1465ac}footer{color:#53677b;margin:24px 0}

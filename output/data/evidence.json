@@ -1103,7 +1103,7 @@
         "heating": "electric",
         "plan": "flat_a"
       },
-      "locality": "Mesa, Arizona",
+      "locality": "Coruscant",
       "period": "2026-03",
       "billing": {
         "total_kwh": "457.278865",
@@ -2399,7 +2399,7 @@
         "heating": "electric",
         "plan": "flat_a"
       },
-      "locality": "Mesa, Arizona",
+      "locality": "Coruscant",
       "period": "2026-03",
       "billing": {
         "total_kwh": "942.343255",
@@ -3716,7 +3716,7 @@
         "heating": "electric",
         "plan": "tou"
       },
-      "locality": "Mesa, Arizona",
+      "locality": "Coruscant",
       "period": "2026-03",
       "billing": {
         "total_kwh": "1616.117365",
@@ -5026,7 +5026,7 @@
         "heating": "electric",
         "plan": "tou"
       },
-      "locality": "Mesa, Arizona",
+      "locality": "Coruscant",
       "period": "2026-03",
       "billing": {
         "total_kwh": "1172.020719",
@@ -6344,7 +6344,7 @@
         "heating": "electric",
         "plan": "flat_b"
       },
-      "locality": "Mesa, Arizona",
+      "locality": "Coruscant",
       "period": "2026-03",
       "billing": {
         "total_kwh": "935.991807",

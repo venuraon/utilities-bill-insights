@@ -69,7 +69,7 @@ async def execute(config, cases, prompts, manifest, mode, prices):
     finally:
         try:
             if harness:
-                summary = summarize(harness.folder, budget.snapshot() if budget else None, interrupted)
+                summary = summarize(harness.folder, budget.snapshot(run_id) if budget else None, interrupted)
                 print(f"Saved: {harness.folder / 'summary.json'}", flush=True)
                 print(f"Report: {comparison()}", flush=True)
                 print(f"Status: {summary['status']} · estimated API cost ${summary['cost']['usage_based_estimated_usd']}", flush=True)

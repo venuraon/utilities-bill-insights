@@ -23,22 +23,22 @@ def chart_svg(daily):
         return bottom - value / maximum * (bottom - top)
     parts = [f'<svg viewBox="0 0 {width} {height}" role="img" aria-label="Daily electricity consumption and estimated electricity consumption in kWh per day" xmlns="http://www.w3.org/2000/svg">',
              '<title>Daily electricity usage, January–March 2026</title>',
-             f'<rect x="{left + 59 * step:.1f}" y="{top}" width="{31 * step:.1f}" height="{bottom - top}" fill="#f2f5ed" rx="5"/>']
+             f'<rect x="{left + 59 * step:.1f}" y="{top}" width="{31 * step:.1f}" height="{bottom - top}" fill="#edf1f5" rx="5"/>']
     for i in range(5):
         value = maximum * i / 4
-        parts.append(f'<line x1="{left}" x2="{right}" y1="{y(value):.1f}" y2="{y(value):.1f}" stroke="#e4e8e2"/><text x="{left-9}" y="{y(value)+4:.1f}" text-anchor="end" fill="#758078" font-size="11">{value:.0f}</text>')
+        parts.append(f'<line x1="{left}" x2="{right}" y1="{y(value):.1f}" y2="{y(value):.1f}" stroke="#e4e8e2"/><text x="{left-9}" y="{y(value)+4:.1f}" text-anchor="end" fill="#757a80" font-size="11">{value:.0f}</text>')
     baseline = []
     for i, row in enumerate(daily):
         x = left + i * step
         high = row["date"] >= "2026-03-01" and row["kwh"] > row["expected_kwh"] * 1.25 + 4
-        color = "#cc7945" if high else "#347765"
+        color = "#cc7945" if high else "#345677"
         parts.append(f'<rect x="{x + 1:.1f}" y="{y(row["kwh"]):.1f}" width="{step - 2:.1f}" height="{bottom - y(row["kwh"]):.1f}" rx="2" fill="{color}"><title>{row["date"]}: {row["kwh"]:.1f} kWh; expected {row["expected_kwh"]:.1f} kWh; {row["temp_f"]:.1f} °F</title></rect>')
         baseline.append(f'{x+step/2:.1f},{y(row["expected_kwh"]):.1f}')
-    parts.append(f'<polyline points="{" ".join(baseline)}" fill="none" stroke="#192f28" stroke-width="2" stroke-dasharray="5 4"/>')
+    parts.append(f'<polyline points="{" ".join(baseline)}" fill="none" stroke="#19242f" stroke-width="2" stroke-dasharray="5 4"/>')
     for index, label in [(0, "JAN 01"), (31, "FEB 01"), (59, "MAR 01"), (89, "MAR 31")]:
         anchor = 'end' if index == 89 else 'start'
-        parts.append(f'<text x="{left+index*step:.1f}" y="267" fill="#758078" font-size="11" text-anchor="{anchor}">{label}</text>')
-    parts.append('<text x="4" y="12" fill="#758078" font-size="11">kWh / day</text></svg>')
+        parts.append(f'<text x="{left+index*step:.1f}" y="267" fill="#757a80" font-size="11" text-anchor="{anchor}">{label}</text>')
+    parts.append('<text x="4" y="12" fill="#757a80" font-size="11">kWh / day</text></svg>')
     return "".join(parts)
 
 
@@ -75,7 +75,7 @@ def shared_weather_svg(daily, locality):
     for index, row in enumerate(daily):
         if row['date'].endswith('-01') or index == len(daily)-1:
             label = row['date'][5:].replace('-', '/')
-            parts.append(f'<text x="{x(index):.1f}" y="170" text-anchor="middle" fill="#758078" font-size="11">{label}</text>')
+            parts.append(f'<text x="{x(index):.1f}" y="170" text-anchor="middle" fill="#757a80" font-size="11">{label}</text>')
     parts.append('<text x="4" y="16" fill="#426b82" font-size="11">°F</text></svg>')
     return ''.join(parts)
 
@@ -84,7 +84,7 @@ def weather_response_note(home, config):
     sensitivities = [h['heat_sensitivity_kw'] for h in config['homes']]
     stronger = home['heat_sensitivity_kw'] > 3 * statistics.median(sensitivities)
     response = 'a stronger' if stronger else 'a lower'
-    return (f"Same Mesa weather as every other home. Demo assumption: this home has {response} "
+    return (f"Same Coruscant weather as every other home. Demo assumption: this home has {response} "
             'electric-heating response to cold temperatures. Building characteristics are simulated, not measured.')
 
 
@@ -94,7 +94,7 @@ def invoice_html(invoice, config):
             ("Peak-period energy", f"{invoice['peak_kwh']:,.1f} kWh × ${p['peak_rate']:.3f}", invoice["peak_charge"]),
             ("Monthly service fee", "Fixed fee", invoice["monthly_fee"])]
     body = "".join(f'<tr><td>{esc(label)}<small>{esc(detail)}</small></td><td>${amount:,.2f}</td></tr>' for label, detail, amount in rows)
-    return f'''<article class="invoice-sheet"><div class="document-head"><div><span class="eyebrow">JUNIPER ELECTRIC</span><h2>Electricity statement</h2></div><span class="document-pill">DEMO INVOICE</span></div>
+    return f'''<article class="invoice-sheet"><div class="document-head"><div><span class="eyebrow">CORUSCANT ELECTRIC</span><h2>Electricity statement</h2></div><span class="document-pill">DEMO INVOICE</span></div>
     <div class="invoice-meta"><div>Account<strong>Home {esc(invoice['home_id'])}</strong></div><div>Billing period<strong>{esc(invoice['month'])}</strong></div><div>Electricity plan<strong>{esc(invoice['plan_name'])}</strong></div></div>
     <table class="charges"><thead><tr><th scope="col">Description</th><th scope="col">Amount</th></tr></thead><tbody>{body}</tbody><tfoot><tr><th scope="row">Total bill</th><td>${invoice['total']:,.2f}</td></tr></tfoot></table>
     <p class="fine-print">Fictional tariffs · weekday peak hours: {config['peak_start_hour']}:00–{config['peak_end_hour']}:00, Arizona local time. Taxes and tariff exceptions omitted. Peak/off-peak labels describe timing even on flat plans.</p></article>'''
@@ -119,7 +119,7 @@ def pair_bars_svg(rows, label):
     parts = [f'<svg class="pair-bars" viewBox="0 0 580 94" role="img" aria-label="{esc(label)}" xmlns="http://www.w3.org/2000/svg"><title>{esc(label)}</title>']
     for index, (name, value, value_label, color) in enumerate(rows):
         y = 12 + index * 43
-        parts.append(f'<text x="0" y="{y + 17}" fill="#5e6e61" font-size="13">{esc(name)}</text><rect x="123" y="{y}" width="335" height="24" rx="4" fill="#edf1e7"/><rect x="123" y="{y}" width="{value / maximum * 335:.2f}" height="24" rx="4" fill="{color}"/><text x="577" y="{y + 17}" text-anchor="end" fill="#21392f" font-size="15" font-weight="600">{esc(value_label)}</text>')
+        parts.append(f'<text x="0" y="{y + 17}" fill="#5e666e" font-size="13">{esc(name)}</text><rect x="123" y="{y}" width="335" height="24" rx="4" fill="#e7ecf1"/><rect x="123" y="{y}" width="{value / maximum * 335:.2f}" height="24" rx="4" fill="{color}"/><text x="577" y="{y + 17}" text-anchor="end" fill="#212d39" font-size="15" font-weight="600">{esc(value_label)}</text>')
     return ''.join(parts) + '</svg>'
 
 
@@ -136,7 +136,7 @@ def email_usage_svg(report):
     label = 'March daily usage with weather-adjusted estimate'
     parts = [f'<svg class="email-usage-plot" viewBox="0 0 580 190" role="img" aria-label="{label}" xmlns="http://www.w3.org/2000/svg"><title>{label}</title>']
     for value in (0, maximum / 2, maximum):
-        parts.append(f'<line x1="{left}" x2="{right}" y1="{y(value):.1f}" y2="{y(value):.1f}" stroke="#e3e9dc"/><text x="{left - 7}" y="{y(value) + 4:.1f}" text-anchor="end" fill="#74816c" font-size="10">{value:.0f}</text>')
+        parts.append(f'<line x1="{left}" x2="{right}" y1="{y(value):.1f}" y2="{y(value):.1f}" stroke="#dce2e9"/><text x="{left - 7}" y="{y(value) + 4:.1f}" text-anchor="end" fill="#6c7681" font-size="10">{value:.0f}</text>')
     if signal:
         index = next((i for i, d in enumerate(days) if d['date'] == signal['start']), 0)
         start_x = x(index)
@@ -147,12 +147,12 @@ def email_usage_svg(report):
             end_x = right
             annotation = f"Mar {int(signal['start'][-2:])} · pattern change"
         parts.append(f'<rect x="{start_x:.1f}" y="{top}" width="{end_x-start_x:.1f}" height="{bottom-top}" fill="#c47b42" opacity="0.09"/><line x1="{start_x:.1f}" x2="{start_x:.1f}" y1="{top}" y2="{bottom}" stroke="#b57645" stroke-dasharray="3 3"/><text x="{min(start_x + 5, right - 150):.1f}" y="20" fill="#986039" font-size="12">{esc(annotation)}</text>')
-    for key, color, dash in [('expected_kwh', '#87927b', '5 4'), ('kwh', '#347765', '')]:
+    for key, color, dash in [('expected_kwh', '#7b8692', '5 4'), ('kwh', '#345677', '')]:
         points = ' '.join(f'{x(i):.1f},{y(d[key]):.1f}' for i, d in enumerate(days))
         parts.append(f'<polyline points="{points}" fill="none" stroke="{color}" stroke-width="{2 if dash else 3}" stroke-dasharray="{dash}" stroke-linejoin="round"/>')
     for index in (0, 7, 14, 21, 30):
-        parts.append(f'<text x="{x(index):.1f}" y="172" text-anchor="middle" fill="#74816c" font-size="10">Mar {index+1}</text>')
-    parts.append('<text x="0" y="20" fill="#74816c" font-size="10">kWh/day</text></svg>')
+        parts.append(f'<text x="{x(index):.1f}" y="172" text-anchor="middle" fill="#6c7681" font-size="10">Mar {index+1}</text>')
+    parts.append('<text x="0" y="20" fill="#6c7681" font-size="10">kWh/day</text></svg>')
     return ''.join(parts)
 
 
@@ -160,8 +160,8 @@ def email_neighborhood_html(comparison, *, normal=False):
     if not comparison['available']:
         return '<section class="visual-neighborhood"><h3>How you compare nearby</h3><p>Not enough similar-sized homes to compare.</p></section>'
     bars = pair_bars_svg([
-        ('Your home', comparison['home_kwh'], f"{comparison['home_kwh']:,.0f} kWh", '#347765'),
-        ('Similar homes', comparison['peer_kwh'], f"{comparison['peer_kwh']:,.0f} kWh", '#a3b492'),
+        ('Your home', comparison['home_kwh'], f"{comparison['home_kwh']:,.0f} kWh", '#345677'),
+        ('Similar homes', comparison['peer_kwh'], f"{comparison['peer_kwh']:,.0f} kWh", '#92a3b4'),
     ], 'March consumption: your home versus the average for similar-sized neighborhood homes')
     badge = 'In line with neighbors' if normal and comparison.get('status') == 'typical' else f"{abs(comparison['difference_pct']):.1f}% {esc(comparison['direction'])}"
     return f'''<section class="visual-neighborhood"><div class="visual-section-head"><h3>How you compare nearby</h3><span class="comparison-badge">{badge}</span></div>{bars}<p class="micro-note">{comparison['count']} neighborhood homes of similar size · {comparison['min_sqft']:,}–{comparison['max_sqft']:,} sq ft · Electric heating</p></section>'''
@@ -206,15 +206,15 @@ def email_html(report, config, chart):
         return esc(resolve(value, report["metrics"]))
     sample = '<div class="sample-note">SAMPLE EXPLANATION · No model calls.</div>' if report["provenance"]["mode"] == "sample" else ''
     current, previous = report['invoice']['total'], report['previous_invoice']['total']
-    bill_bars = pair_bars_svg([('February', previous, f'${previous:,.2f}', '#a3b492'),
-                               ('March', current, f'${current:,.2f}', '#347765')], 'February and March electricity bills in dollars')
+    bill_bars = pair_bars_svg([('February', previous, f'${previous:,.2f}', '#92a3b4'),
+                               ('March', current, f'${current:,.2f}', '#345677')], 'February and March electricity bills in dollars')
     insight = customer_insight(report)
     guidance = guidance_html(report)
     plan_note = plan_insight_html(report)
     if not report['analysis']['is_anomaly']:
         return inline_email_styles(f'''{sample}<article class="email-sheet visual-email"><div class="mail-meta"><span>{esc(config['utility'])} → home-{esc(report['home']['id'].lower())}@example.com</span><strong>Your March electricity snapshot</strong></div><div class="visual-email-body"><header class="visual-email-header"><span class="eyebrow">MARCH 2026</span><h2>Your March snapshot.</h2><p class="visual-caption">{esc(insight['title'])}.</p></header><section class="visual-bill"><div class="visual-section-head"><h3>Your electricity bill</h3><span>{esc(report['metrics']['bill_change'])} vs February</span></div>{bill_bars}<div class="visual-stats"><span><strong>{esc(report['metrics']['daily_change'])}</strong> daily consumption</span><span><strong>{esc(report['metrics']['feb_days'])} → {esc(report['metrics']['march_days'])}</strong> billing days</span></div></section>{guidance}{email_neighborhood_html(report['neighborhood'], normal=True)}{plan_note}<footer class="micro-note">Synthetic demo · Similar-size comparison · Occupancy and equipment may differ.</footer></div></article>''')
     return inline_email_styles(f'''{sample}<article class="email-sheet visual-email"><div class="mail-meta"><span>{esc(config['utility'])} → home-{esc(report['home']['id'].lower())}@example.com</span><strong>{text(email['subject'])}</strong></div>
-    <div class="visual-email-body"><header class="visual-email-header"><span class="eyebrow">JUNIPER ELECTRIC · MARCH 2026</span><h2>Your bill, explained.</h2></header>
+    <div class="visual-email-body"><header class="visual-email-header"><span class="eyebrow">CORUSCANT ELECTRIC · MARCH 2026</span><h2>Your bill, explained.</h2></header>
     <section class="visual-bill"><div class="visual-section-head"><h3>Your electricity bill</h3><span>{esc(report['metrics']['bill_change'])} vs February</span></div>{bill_bars}
     <div class="visual-stats"><span><strong>{esc(report['metrics']['daily_change'])}</strong> daily usage</span><span><strong>{esc(report['metrics']['feb_days'])} → {esc(report['metrics']['march_days'])}</strong> billing days</span></div></section>
     <section class="visual-pattern"><h3>{text(email['intro'])}</h3>{email_usage_svg(report)}<div class="visual-legend"><span><i class="actual-key"></i> Your usage</span><span><i class="estimate-key"></i> Estimated usage (kWh/day)</span></div></section>

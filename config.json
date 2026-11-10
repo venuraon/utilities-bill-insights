@@ -1,6 +1,6 @@
 {
-  "utility": "Juniper Electric",
-  "locality": "Mesa, Arizona",
+  "utility": "Coruscant Electric",
+  "locality": "Coruscant",
   "timezone": "America/Phoenix",
   "model": "gpt-6-luna",
   "max_concurrent_homes": 2,

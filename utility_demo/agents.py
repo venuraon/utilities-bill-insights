@@ -63,6 +63,10 @@ in explanation. Otherwise set needs_review=false and draft a qualified, factual 
 For constant_draw describe sustained extra demand and suggest checking running equipment;
 for baseline_step describe when the baseline rose and suggest checking schedule/equipment changes.
 Use "may", "could", or "cause unconfirmed" for possible causes. Do not demand proof of the cause.''')
+LEGACY_ANALYST_PROMPT = ANALYST_PROMPT
+ANALYST_PROMPT = ANALYST_PROMPT.replace(
+    'Include bill_total, bill_change, daily_change, feb_days and march_days in explanation.',
+    'Include bill_total, daily_change, feb_days and march_days in explanation. Include bill_change in the headline or explanation.')
 EMAIL_PROMPT = """You are the customer communications specialist. Input is ONLY validated analyst JSON.
 Translate its findings into empathetic, jargon-free captions for a modern visual email.
 Return subject (at most eight words), intro (headline, at most seven words),
@@ -150,7 +154,8 @@ def validate_analysis(analysis, evidence, *, allow_review=False):
         required.update({'minimum_draw', 'baseline_step'})
     if not required.issubset(metrics):
         raise ValueError('Analysis omitted required mathematical justification')
-    if not {'bill_total', 'bill_change', 'daily_change', 'feb_days', 'march_days'}.issubset(TOKEN.findall(analysis['explanation'])):
+    if (not {'bill_total', 'daily_change', 'feb_days', 'march_days'}.issubset(TOKEN.findall(analysis['explanation']))
+            or 'bill_change' not in TOKEN.findall(analysis['headline'] + ' ' + analysis['explanation'])):
         raise ValueError('Analysis omitted required billing comparisons')
     if analysis['needs_review'] and not allow_review:
         raise ValueError('Analyst flagged findings for staff review; email generation stopped')
@@ -325,17 +330,21 @@ async def explain(evidence, model, mode, cache_dir, *, resume=False):
     else:
         path = Path(cache_dir) / f"{evidence['home']['id']}-{fingerprint(evidence, model)}.json"
         if (mode == 'cached' or resume) and not path.exists():
-            previous = Path(cache_dir) / f"{evidence['home']['id']}-{fingerprint(evidence, model, analyst_prompt=PREVIOUS_ANALYST_PROMPT)}.json"
-            if previous.exists():
+            for prior_prompt in (LEGACY_ANALYST_PROMPT, PREVIOUS_ANALYST_PROMPT):
+                previous = Path(cache_dir) / f"{evidence['home']['id']}-{fingerprint(evidence, model, analyst_prompt=prior_prompt)}.json"
+                if not previous.exists():
+                    continue
                 stored = json.loads(previous.read_text())
                 validate_result(stored['analysis'], stored['email'], evidence)
                 if not stored['analysis']['needs_review']:
                     # The new rule only changes review criteria. Previously approved
                     # numeric evidence remains valid; record its origin explicitly.
                     save_json(path, {**stored, 'migrated_from': previous.name,
-                                     'migration_reason': 'Approved findings revalidated under qualified-explanation review policy'})
+                                     'migration_reason': 'Approved findings revalidated under current analyst policy'})
+                    break
                 elif mode == 'live':
                     print(f"Home {evidence['home']['id']}: reassessing old review hold under qualified-explanation policy", flush=True)
+                break
         reuse = mode == 'cached' or (resume and path.exists())
         if reuse:
             if not path.exists():

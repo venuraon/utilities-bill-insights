@@ -65,5 +65,8 @@ def load_fixtures():
     cases = json.loads((ROOT / 'fixtures/cases.json').read_text())
     prompts = json.loads((ROOT / 'fixtures/prompts.json').read_text())
     updates = json.loads((ROOT / 'prompt_updates.json').read_text())
+    prompts['analyst'] = prompts['analyst'].replace(
+        'Include bill_total, bill_change, daily_change, feb_days and march_days in explanation.',
+        'Include bill_total, daily_change, feb_days and march_days in explanation. Include bill_change in the headline or explanation.')
     prompts = {key: text + '\nEvaluation refinement:\n' + updates[key] for key, text in prompts.items()}
     return {c['case_id']: c for c in cases}, prompts, manifest

@@ -9,8 +9,9 @@ from decimal import Decimal
 from uuid import uuid4
 from .common import RESULTS, dumps, save_json, utc_now
 
-TOTAL_LIMIT = Decimal('2.00')
-REQUEST_LIMIT = Decimal('1.90')  # Keep ten cents outside the request allowance.
+TOTAL_LIMIT = Decimal('4.00')
+REQUEST_LIMIT = Decimal('3.90')  # Keep ten cents outside the overall request allowance.
+RUN_LIMIT = Decimal('0.35')
 JUDGE_INPUT_CAP = 20_000
 WRAPPER_ALLOWANCE = 4096
 
@@ -61,23 +62,23 @@ class Budget:
         try:
             if self.path.exists():
                 self.state = json.loads(self.path.read_text())
-                if self.state.get('limit_usd') not in ('1.00', str(TOTAL_LIMIT)) or not isinstance(self.state.get('entries'), dict):
+                if self.state.get('limit_usd') not in ('1.00', '2.00', str(TOTAL_LIMIT)) or not isinstance(self.state.get('entries'), dict):
                     raise ValueError('Invalid budget ledger; refusing paid requests')
                 for entry in self.state['entries'].values():
                     charged, maximum = Decimal(entry['charged_or_reserved_usd']), Decimal(entry['maximum_usd'])
                     if not charged.is_finite() or not maximum.is_finite() or min(charged, maximum) < 0 or entry['status'] not in (
                             'reserved', 'estimated', 'unknown', 'not_sent'):
                         raise ValueError('Invalid budget entry; refusing paid requests')
-                if self.state['limit_usd'] == '1.00':
-                    # Explicit user-authorized increase. Preserve every charge/reservation.
+                if self.state['limit_usd'] != str(TOTAL_LIMIT):
+                    # Preserve all past charges and unresolved reservations.
                     self.state.setdefault('limit_changes', []).append({
-                        'previous_limit_usd': '1.00', 'new_limit_usd': str(TOTAL_LIMIT),
-                        'changed_utc': utc_now(), 'reason': 'User authorized a $2 total evaluation allowance'})
-                    self.state.update(limit_usd=str(TOTAL_LIMIT), request_allowance_usd=str(REQUEST_LIMIT))
+                        'previous_limit_usd': self.state['limit_usd'], 'new_limit_usd': str(TOTAL_LIMIT),
+                        'changed_utc': utc_now(), 'reason': 'User authorized a $4 overall limit and $0.35 per evaluation'})
+                    self.state.update(limit_usd=str(TOTAL_LIMIT), request_allowance_usd=str(REQUEST_LIMIT), run_limit_usd=str(RUN_LIMIT))
                     save_json(self.path, self.state)
             else:
                 self.state = {'limit_usd': str(TOTAL_LIMIT), 'request_allowance_usd': str(REQUEST_LIMIT),
-                              'entries': {}}
+                              'run_limit_usd': str(RUN_LIMIT), 'entries': {}}
         except BaseException:
             self.__exit__(None, None, None)
             raise
@@ -97,6 +98,10 @@ class Budget:
             raise ValueError('Invalid cost reservation')
         if self.committed + sum(amounts) > REQUEST_LIMIT:
             raise BudgetExceeded('Remaining shared budget cannot cover the agent and its judge')
+        run_committed = sum((Decimal(e['charged_or_reserved_usd']) for e in self.state['entries'].values()
+                             if e['run_id'] == run_id), Decimal(0))
+        if run_committed + sum(amounts) > RUN_LIMIT:
+            raise BudgetExceeded('Remaining per-evaluation budget cannot cover the agent and its judge')
         ids = []
         for amount in amounts:
             key = uuid4().hex
@@ -121,8 +126,11 @@ class Budget:
         if charged > reserved:
             raise BudgetExceeded('Observed cost exceeded its reservation; stopping all remaining paid requests')
 
-    def snapshot(self):
+    def snapshot(self, run_id=None):
+        run_committed = sum((Decimal(e['charged_or_reserved_usd']) for e in self.state['entries'].values()
+                             if e['run_id'] == run_id), Decimal(0)) if run_id else None
         return {'limit_usd': str(TOTAL_LIMIT), 'request_allowance_usd': str(REQUEST_LIMIT),
+                'run_limit_usd': str(RUN_LIMIT), 'run_committed_usd': str(run_committed) if run_id else None,
                 'shared_committed_usd': str(self.committed),
                 'remaining_request_allowance_usd': str(max(Decimal(0), REQUEST_LIMIT - self.committed)),
                 'unknown_or_interrupted_requests': sum(e['status'] in ('unknown', 'reserved')

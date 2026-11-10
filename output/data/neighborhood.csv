@@ -1,61 +1,61 @@
 neighbor_id,sqft,locality,heating,month,kwh,source
-NB-001,800,"Mesa, Arizona",electric,2026-03,420.705,synthetic benchmark
-NB-002,844,"Mesa, Arizona",electric,2026-03,507.723,synthetic benchmark
-NB-003,888,"Mesa, Arizona",electric,2026-03,435.069,synthetic benchmark
-NB-004,932,"Mesa, Arizona",electric,2026-03,516.63,synthetic benchmark
-NB-005,976,"Mesa, Arizona",electric,2026-03,512.294,synthetic benchmark
-NB-006,1020,"Mesa, Arizona",electric,2026-03,475.949,synthetic benchmark
-NB-007,1064,"Mesa, Arizona",electric,2026-03,522.21,synthetic benchmark
-NB-008,1108,"Mesa, Arizona",electric,2026-03,534.092,synthetic benchmark
-NB-009,1153,"Mesa, Arizona",electric,2026-03,555.271,synthetic benchmark
-NB-010,1197,"Mesa, Arizona",electric,2026-03,537.408,synthetic benchmark
-NB-011,1241,"Mesa, Arizona",electric,2026-03,535.39,synthetic benchmark
-NB-012,1285,"Mesa, Arizona",electric,2026-03,638.602,synthetic benchmark
-NB-013,1329,"Mesa, Arizona",electric,2026-03,546.559,synthetic benchmark
-NB-014,1373,"Mesa, Arizona",electric,2026-03,583.92,synthetic benchmark
-NB-015,1417,"Mesa, Arizona",electric,2026-03,644.242,synthetic benchmark
-NB-016,1461,"Mesa, Arizona",electric,2026-03,567.684,synthetic benchmark
-NB-017,1505,"Mesa, Arizona",electric,2026-03,608.054,synthetic benchmark
-NB-018,1549,"Mesa, Arizona",electric,2026-03,632.281,synthetic benchmark
-NB-019,1593,"Mesa, Arizona",electric,2026-03,584.565,synthetic benchmark
-NB-020,1637,"Mesa, Arizona",electric,2026-03,541.122,synthetic benchmark
-NB-021,1681,"Mesa, Arizona",electric,2026-03,748.38,synthetic benchmark
-NB-022,1725,"Mesa, Arizona",electric,2026-03,655.208,synthetic benchmark
-NB-023,1769,"Mesa, Arizona",electric,2026-03,662.225,synthetic benchmark
-NB-024,1814,"Mesa, Arizona",electric,2026-03,663.878,synthetic benchmark
-NB-025,1858,"Mesa, Arizona",electric,2026-03,666.941,synthetic benchmark
-NB-026,1902,"Mesa, Arizona",electric,2026-03,752.192,synthetic benchmark
-NB-027,1946,"Mesa, Arizona",electric,2026-03,691.777,synthetic benchmark
-NB-028,1990,"Mesa, Arizona",electric,2026-03,776.58,synthetic benchmark
-NB-029,2034,"Mesa, Arizona",electric,2026-03,650.82,synthetic benchmark
-NB-030,2078,"Mesa, Arizona",electric,2026-03,654.23,synthetic benchmark
-NB-031,2122,"Mesa, Arizona",electric,2026-03,807.482,synthetic benchmark
-NB-032,2166,"Mesa, Arizona",electric,2026-03,698.876,synthetic benchmark
-NB-033,2210,"Mesa, Arizona",electric,2026-03,834.94,synthetic benchmark
-NB-034,2254,"Mesa, Arizona",electric,2026-03,742.144,synthetic benchmark
-NB-035,2298,"Mesa, Arizona",electric,2026-03,778.811,synthetic benchmark
-NB-036,2342,"Mesa, Arizona",electric,2026-03,803.456,synthetic benchmark
-NB-037,2386,"Mesa, Arizona",electric,2026-03,900.937,synthetic benchmark
-NB-038,2431,"Mesa, Arizona",electric,2026-03,873.547,synthetic benchmark
-NB-039,2475,"Mesa, Arizona",electric,2026-03,738.684,synthetic benchmark
-NB-040,2519,"Mesa, Arizona",electric,2026-03,933.283,synthetic benchmark
-NB-041,2563,"Mesa, Arizona",electric,2026-03,884.846,synthetic benchmark
-NB-042,2607,"Mesa, Arizona",electric,2026-03,718.68,synthetic benchmark
-NB-043,2651,"Mesa, Arizona",electric,2026-03,778.655,synthetic benchmark
-NB-044,2695,"Mesa, Arizona",electric,2026-03,963.523,synthetic benchmark
-NB-045,2739,"Mesa, Arizona",electric,2026-03,848.588,synthetic benchmark
-NB-046,2783,"Mesa, Arizona",electric,2026-03,868.566,synthetic benchmark
-NB-047,2827,"Mesa, Arizona",electric,2026-03,985.302,synthetic benchmark
-NB-048,2871,"Mesa, Arizona",electric,2026-03,801.25,synthetic benchmark
-NB-049,2915,"Mesa, Arizona",electric,2026-03,1042.345,synthetic benchmark
-NB-050,2959,"Mesa, Arizona",electric,2026-03,957.155,synthetic benchmark
-NB-051,3003,"Mesa, Arizona",electric,2026-03,844.45,synthetic benchmark
-NB-052,3047,"Mesa, Arizona",electric,2026-03,901.55,synthetic benchmark
-NB-053,3092,"Mesa, Arizona",electric,2026-03,837.213,synthetic benchmark
-NB-054,3136,"Mesa, Arizona",electric,2026-03,1083.944,synthetic benchmark
-NB-055,3180,"Mesa, Arizona",electric,2026-03,859.208,synthetic benchmark
-NB-056,3224,"Mesa, Arizona",electric,2026-03,942.73,synthetic benchmark
-NB-057,3268,"Mesa, Arizona",electric,2026-03,887.07,synthetic benchmark
-NB-058,3312,"Mesa, Arizona",electric,2026-03,975.935,synthetic benchmark
-NB-059,3356,"Mesa, Arizona",electric,2026-03,950.166,synthetic benchmark
-NB-060,3400,"Mesa, Arizona",electric,2026-03,1106.837,synthetic benchmark
+NB-001,800,"Coruscant",electric,2026-03,420.705,synthetic benchmark
+NB-002,844,"Coruscant",electric,2026-03,507.723,synthetic benchmark
+NB-003,888,"Coruscant",electric,2026-03,435.069,synthetic benchmark
+NB-004,932,"Coruscant",electric,2026-03,516.63,synthetic benchmark
+NB-005,976,"Coruscant",electric,2026-03,512.294,synthetic benchmark
+NB-006,1020,"Coruscant",electric,2026-03,475.949,synthetic benchmark
+NB-007,1064,"Coruscant",electric,2026-03,522.21,synthetic benchmark
+NB-008,1108,"Coruscant",electric,2026-03,534.092,synthetic benchmark
+NB-009,1153,"Coruscant",electric,2026-03,555.271,synthetic benchmark
+NB-010,1197,"Coruscant",electric,2026-03,537.408,synthetic benchmark
+NB-011,1241,"Coruscant",electric,2026-03,535.39,synthetic benchmark
+NB-012,1285,"Coruscant",electric,2026-03,638.602,synthetic benchmark
+NB-013,1329,"Coruscant",electric,2026-03,546.559,synthetic benchmark
+NB-014,1373,"Coruscant",electric,2026-03,583.92,synthetic benchmark
+NB-015,1417,"Coruscant",electric,2026-03,644.242,synthetic benchmark
+NB-016,1461,"Coruscant",electric,2026-03,567.684,synthetic benchmark
+NB-017,1505,"Coruscant",electric,2026-03,608.054,synthetic benchmark
+NB-018,1549,"Coruscant",electric,2026-03,632.281,synthetic benchmark
+NB-019,1593,"Coruscant",electric,2026-03,584.565,synthetic benchmark
+NB-020,1637,"Coruscant",electric,2026-03,541.122,synthetic benchmark
+NB-021,1681,"Coruscant",electric,2026-03,748.38,synthetic benchmark
+NB-022,1725,"Coruscant",electric,2026-03,655.208,synthetic benchmark
+NB-023,1769,"Coruscant",electric,2026-03,662.225,synthetic benchmark
+NB-024,1814,"Coruscant",electric,2026-03,663.878,synthetic benchmark
+NB-025,1858,"Coruscant",electric,2026-03,666.941,synthetic benchmark
+NB-026,1902,"Coruscant",electric,2026-03,752.192,synthetic benchmark
+NB-027,1946,"Coruscant",electric,2026-03,691.777,synthetic benchmark
+NB-028,1990,"Coruscant",electric,2026-03,776.58,synthetic benchmark
+NB-029,2034,"Coruscant",electric,2026-03,650.82,synthetic benchmark
+NB-030,2078,"Coruscant",electric,2026-03,654.23,synthetic benchmark
+NB-031,2122,"Coruscant",electric,2026-03,807.482,synthetic benchmark
+NB-032,2166,"Coruscant",electric,2026-03,698.876,synthetic benchmark
+NB-033,2210,"Coruscant",electric,2026-03,834.94,synthetic benchmark
+NB-034,2254,"Coruscant",electric,2026-03,742.144,synthetic benchmark
+NB-035,2298,"Coruscant",electric,2026-03,778.811,synthetic benchmark
+NB-036,2342,"Coruscant",electric,2026-03,803.456,synthetic benchmark
+NB-037,2386,"Coruscant",electric,2026-03,900.937,synthetic benchmark
+NB-038,2431,"Coruscant",electric,2026-03,873.547,synthetic benchmark
+NB-039,2475,"Coruscant",electric,2026-03,738.684,synthetic benchmark
+NB-040,2519,"Coruscant",electric,2026-03,933.283,synthetic benchmark
+NB-041,2563,"Coruscant",electric,2026-03,884.846,synthetic benchmark
+NB-042,2607,"Coruscant",electric,2026-03,718.68,synthetic benchmark
+NB-043,2651,"Coruscant",electric,2026-03,778.655,synthetic benchmark
+NB-044,2695,"Coruscant",electric,2026-03,963.523,synthetic benchmark
+NB-045,2739,"Coruscant",electric,2026-03,848.588,synthetic benchmark
+NB-046,2783,"Coruscant",electric,2026-03,868.566,synthetic benchmark
+NB-047,2827,"Coruscant",electric,2026-03,985.302,synthetic benchmark
+NB-048,2871,"Coruscant",electric,2026-03,801.25,synthetic benchmark
+NB-049,2915,"Coruscant",electric,2026-03,1042.345,synthetic benchmark
+NB-050,2959,"Coruscant",electric,2026-03,957.155,synthetic benchmark
+NB-051,3003,"Coruscant",electric,2026-03,844.45,synthetic benchmark
+NB-052,3047,"Coruscant",electric,2026-03,901.55,synthetic benchmark
+NB-053,3092,"Coruscant",electric,2026-03,837.213,synthetic benchmark
+NB-054,3136,"Coruscant",electric,2026-03,1083.944,synthetic benchmark
+NB-055,3180,"Coruscant",electric,2026-03,859.208,synthetic benchmark
+NB-056,3224,"Coruscant",electric,2026-03,942.73,synthetic benchmark
+NB-057,3268,"Coruscant",electric,2026-03,887.07,synthetic benchmark
+NB-058,3312,"Coruscant",electric,2026-03,975.935,synthetic benchmark
+NB-059,3356,"Coruscant",electric,2026-03,950.166,synthetic benchmark
+NB-060,3400,"Coruscant",electric,2026-03,1106.837,synthetic benchmark

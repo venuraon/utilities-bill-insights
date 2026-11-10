@@ -1,5 +1,5 @@
 {
-  "agent_model": "gpt-5.4",
+  "agent_model": "gpt-6-luna",
   "judge_model": "gpt-6.1-sol",
   "cases": ["A", "B", "C", "D", "E"],
   "repetitions": 2,

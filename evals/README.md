@@ -125,8 +125,18 @@ not human ground truth; inspect the saved explanations when presenting results.
 
 ## Revised checks and judge feedback
 
-The current `checks-v3` policy keeps the LLM's original word targets, but Python
-allows twenty percent extra, rounded down to whole words: subject 9, intro 8,
+The evaluation-only analyst prompt incorporates feedback from the saved Luna run:
+when weather fit is weak or extrapolated, it must qualify weather's role and avoid
+interpreting the residual percentage in prose. The residual is relative to the
+weather model's estimate, not a percentage of total use. The judge's criteria and
+the requirement to include the calculated metric in anomaly evidence are unchanged.
+
+The current `checks-v5` policy accepts the bill change in either the analyst
+headline or explanation, matching the demo; the other billing comparisons remain
+required in the explanation. Original saved scores remain unchanged.
+The policy keeps the LLM's original word targets. Python
+allows twenty percent extra, rounded down to whole words, except that the intro
+has an explicit 11-word hard limit: subject 9, intro 11,
 explanation 28, action 16, and combined body 54. The analyst explanation hard
 limit is 144 words while its prompt still requests 120. These private enforcement
 limits are stored in run metadata and never supplied to either agent or judge.
@@ -182,15 +192,16 @@ separate from accuracy: identical wrong answers are still repeatable. A single
 response has no decision-agreement score. Provider prompt-cache hits are recorded
 in usage; application-level output caches are never reused as new repetitions.
 
-## The shared $2 budget
+## Evaluation budgets
 
 `evals/results/budget.json` persists across **all** live runs and models. Keep this
 file: deleting it would discard the local spending history. There is intentionally
 no budget reset/increase command. A file lock prevents simultaneous paid runs.
 
-The runner allocates at most **$1.90** to requests, leaving a ten-cent margin.
-The user-authorized increase from $1 to $2 is recorded in the existing ledger;
-all previous spending and unknown-request reservations continue to count.
+Each live evaluation has a **$0.35** limit; all runs together have a **$4.00** limit.
+The runner allocates at most **$3.90** to requests overall, leaving a ten-cent margin.
+The authorized increase is recorded in the existing ledger; all previous spending
+and unknown-request reservations continue to count. Each new run gets its own cap.
 Before each agent call it reserves the agent's conservative maximum plus room
 for its judge. Input reservations use UTF-8 bytes for prompts, inputs, and schemas
 plus framing allowance; this overestimates normal token counts. Judge inputs have
@@ -206,6 +217,10 @@ separately. This is a conservative local guard using dated prices, not an API
 account billing limit; invoices, special pricing, or unexpected provider accounting
 must be reconciled against the recorded request IDs. No paid calls are needed to
 test or preview this module.
+
+The reservation for an agent and judge is intentionally conservative, so a run can
+stop below $0.35 even if its expected final cost is lower. A new command starts a
+new run; it does not resume incomplete cases from an earlier run.
 
 ## Saved evidence for your demo
 

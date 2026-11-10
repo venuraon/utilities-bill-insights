@@ -80,8 +80,9 @@ def score(case, stage, output, upstream=None, execution_status=None):
             check('required_evidence', required_references, 'contract'),
             check('evidence_reference_syntax', lambda: validate_texts(texts, approved_metrics(output)), 'contract'),
             check('billing_comparisons', lambda: require(
-                {'bill_total', 'bill_change', 'daily_change', 'feb_days', 'march_days'} <= set(TOKEN.findall(output['explanation'])),
-                'Explanation must include the required billing comparisons'), 'contract'),
+                {'bill_total', 'daily_change', 'feb_days', 'march_days'} <= set(TOKEN.findall(output['explanation']))
+                and 'bill_change' in TOKEN.findall(output['headline'] + ' ' + output['explanation']),
+                'Explanation needs bill total, daily change, and both day counts; bill change must appear in headline or explanation'), 'contract'),
             check('analyst_word_limit', lambda: require(
                 len(resolve(output['explanation'], metrics).split()) <= ANALYST_HARD_LIMIT,
                 f'Resolved analyst explanation exceeds {ANALYST_HARD_LIMIT} words'), 'presentation'),

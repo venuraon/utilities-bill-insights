@@ -27,12 +27,8 @@
       "calculated_value": "Mar 15"
     },
     {
-      "metric_id": "baseline_night",
-      "calculated_value": "0.59 kW"
-    },
-    {
-      "metric_id": "march_night",
-      "calculated_value": "0.97 kW"
+      "metric_id": "signal_days",
+      "calculated_value": "17"
     },
     {
       "metric_id": "baseline_step",
@@ -47,16 +43,16 @@
       "calculated_value": "+45.7%"
     },
     {
+      "metric_id": "peer_direction",
+      "calculated_value": "higher"
+    },
+    {
+      "metric_id": "peer_difference",
+      "calculated_value": "45.4%"
+    },
+    {
       "metric_id": "peer_count",
       "calculated_value": "22"
-    },
-    {
-      "metric_id": "peer_kwh",
-      "calculated_value": "806.1 kWh"
-    },
-    {
-      "metric_id": "best_plan",
-      "calculated_value": "Home Value"
     },
     {
       "metric_id": "best_plan_total",
@@ -72,13 +68,13 @@
     "plan_id": "flat_b",
     "estimated_bill": "191.94",
     "savings": "16.66",
-    "reason": "Repricing the same March usage on {{best_plan}} gives an estimated bill of {{best_plan_total}} and savings of {{plan_savings}}."
+    "reason": "Lowest-cost registered option for identical March usage, repriced at {{best_plan_total}} with savings of {{plan_savings}}."
   },
-  "headline": "March costs rose alongside a sustained baseline increase",
-  "explanation": "The bill was {{bill_total}}, up {{bill_change}}. Daily usage changed {{daily_change}} across {{feb_days}} February days and {{march_days}} March days. Usage rose after {{signal_start}}: nighttime demand increased from {{baseline_night}} to {{march_night}}, with a {{baseline_step}} baseline step and a minimum draw of {{minimum_draw}}. This suggests sustained extra demand, but its cause is unconfirmed. Weather leaves {{weather_residual}} unexplained; the fit is weak and March is outside its training range, so weather is not established as the cause. Usage was above the {{peer_count}} matched homes' average of {{peer_kwh}}; peer matching has limitations.",
+  "headline": "Bill increased {{bill_change}} alongside a higher usage baseline",
+  "explanation": "The bill was {{bill_total}}, and daily use rose {{daily_change}}. February had {{feb_days}} days and March had {{march_days}}. A baseline increase of {{baseline_step}} began {{signal_start}} and the signal lasted {{signal_days}} days; minimum draw was {{minimum_draw}}. This indicates sustained extra demand, though its cause is unconfirmed. Weather fit was poor and outside its training range, with {{weather_residual}} unexplained, so weather is not a reliable explanation. Use was {{peer_direction}} similar homes by {{peer_difference}}; peer matching does not account for occupancy or equipment.",
   "actions": [
-    "Check for schedule or equipment changes near {{signal_start}}.",
-    "Check equipment that may be running continuously; the meter pattern does not identify a specific device."
+    "Check for schedule or equipment changes around {{signal_start}}.",
+    "Review equipment that may be running longer than intended."
   ],
   "needs_review": false
 }

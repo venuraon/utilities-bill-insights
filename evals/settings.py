@@ -8,7 +8,11 @@ from .common import ROOT
 
 
 def load_config(path=None):
-    config = json.loads(Path(path or ROOT / 'config.json').read_text())
+    config = json.loads(Path(path or ROOT.parent / 'config.json').read_text())
+    if 'evaluation' in config:
+        config = config['evaluation']
+    if not isinstance(config, dict):
+        raise ValueError('Evaluation config must be an object')
     expected = {'agent_model', 'judge_model', 'cases', 'repetitions', 'max_output_tokens',
                 'reasoning_effort', 'timeout_seconds', 'email_revisions'}
     if set(config) != expected:

@@ -57,11 +57,11 @@ function renderHome(id) {
     const total = document.createElement('strong'); total.textContent = currency(plan.total);
     row.append(name,total); byId('plan-list').append(row);
   }
-  byId('email-link').href = `emails/${id}-2026-03.html`;
+  byId('email-link').href = `../emails/${id}-2026-03.html`;
   byId('email-link').textContent = review ? 'View review status ↗' : 'Open customer email ↗';
-  byId('analysis-link').href = `analyses/${id}.json`;
-  byId('jan-link').href = `invoices/${id}-2026-01.html`;
-  byId('feb-link').href = `invoices/${id}-2026-02.html`;
+  byId('analysis-link').href = `../analyses/${id}.json`;
+  byId('jan-link').href = `../invoices/${id}-2026-01.html`;
+  byId('feb-link').href = `../invoices/${id}-2026-02.html`;
   byId('pipeline-note').textContent = review
     ? `The billing analyst requested staff review. The communications agent was skipped for this home. Open Analyst JSON to inspect its findings. Saved results remain available through --resume; the flag has not been overridden.`
     : sample

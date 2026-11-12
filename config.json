@@ -23,6 +23,16 @@
     {"id": "D", "sqft": 2400, "plan": "tou", "heating": "electric", "heat_sensitivity_kw": 0.014},
     {"id": "E", "sqft": 3000, "plan": "flat_b", "heating": "electric", "heat_sensitivity_kw": 0.016}
   ],
+  "evaluation": {
+    "agent_model": "gpt-6-luna",
+    "judge_model": "gpt-6.1-sol",
+    "cases": ["A", "B", "C", "D", "E"],
+    "repetitions": 2,
+    "max_output_tokens": {"analyst": 4096, "communications": 1536, "judge": 1536},
+    "reasoning_effort": {"agent": "low", "judge": "low"},
+    "timeout_seconds": 60,
+    "email_revisions": 0
+  },
   "injections": [
     {"home": "C", "start": "2026-03-08", "extra_kw": 1.6, "kind": "continuous"},
     {"home": "D", "start": "2026-03-15", "extra_kw": 2.4, "kind": "evening", "start_hour": 18, "end_hour": 21},

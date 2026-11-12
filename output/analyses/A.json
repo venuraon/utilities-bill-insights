@@ -3,16 +3,12 @@
   "anomaly_type": "none",
   "mathematical_justification": [
     {
-      "metric_id": "previous_bill",
-      "calculated_value": "$80.43"
+      "metric_id": "bill_change",
+      "calculated_value": "+$10.88"
     },
     {
       "metric_id": "bill_total",
       "calculated_value": "$91.31"
-    },
-    {
-      "metric_id": "bill_change",
-      "calculated_value": "+$10.88"
     },
     {
       "metric_id": "daily_change",
@@ -27,12 +23,12 @@
       "calculated_value": "31"
     },
     {
-      "metric_id": "best_plan",
-      "calculated_value": "Evening Flex"
-    },
-    {
       "metric_id": "best_plan_total",
       "calculated_value": "$85.94"
+    },
+    {
+      "metric_id": "best_plan",
+      "calculated_value": "Evening Flex"
     },
     {
       "metric_id": "plan_savings",
@@ -44,13 +40,13 @@
     "plan_id": "tou",
     "estimated_bill": "85.94",
     "savings": "5.37",
-    "reason": "For identical March usage, {{best_plan}} costs {{best_plan_total}} and saves {{plan_savings}}; demo eligibility is assumed."
+    "reason": "Lowest registered cost for identical usage is {{best_plan_total}} on {{best_plan}}, saving {{plan_savings}}."
   },
-  "headline": "Bill increased as daily use rose; a lower-cost plan is available",
-  "explanation": "The bill rose from {{previous_bill}} to {{bill_total}} ({{bill_change}}), while daily use increased {{daily_change}}. The previous period covered {{feb_days}} days and this one {{march_days}} days. Weather evidence is inconclusive: the historical fit is weak and March falls outside the training range, so the increase should not be attributed to weather. The measured usage change does not confirm a specific cause.",
+  "headline": "Bill increased {{bill_change}}.",
+  "explanation": "The bill total was {{bill_total}}. The comparison covers {{feb_days}} days in February and {{march_days}} days in March; daily usage rose {{daily_change}}. Both the longer billing period and higher daily use are consistent with the higher bill. No anomaly was flagged. Weather does not provide a reliable explanation: the historical fit is weak, and conditions are outside its training range.",
   "actions": [
-    "Consider whether {{best_plan}}'s time-of-use structure fits your schedule; future savings depend on future usage.",
-    "Compare daily use and household schedules, and check for equipment left running; the cause is unconfirmed."
+    "Review whether schedules or equipment use changed; the cause is unconfirmed.",
+    "Consider {{best_plan}} for the same usage."
   ],
   "needs_review": false
 }

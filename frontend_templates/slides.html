@@ -32,7 +32,7 @@
  <div class="card impact-chart"><strong>Impact vs. complexity</strong><svg viewBox="0 0 260 155" role="img" aria-labelledby="impact-title impact-desc"><title id="impact-title">Impact and complexity assessment</title><desc id="impact-desc">The use case is assessed as high impact and medium complexity.</desc><path d="M42 18V116H234" fill="none" stroke="#78828d" stroke-width="1.5"/><path d="M42 67H234M138 18V116" fill="none" stroke="#d4dbe2" stroke-dasharray="3 4"/><text x="2" y="17" font-size="11" fill="#4f5963">Impact</text><text x="9" y="36" font-size="10" fill="#5d6874">High</text><text x="12" y="116" font-size="10" fill="#5d6874">Low</text><text x="42" y="130" font-size="10" fill="#5d6874">Low</text><text x="119" y="130" font-size="10" fill="#5d6874">Medium</text><text x="212" y="130" font-size="10" fill="#5d6874">High</text><text x="100" y="148" font-size="11" fill="#4f5963">Complexity →</text><circle cx="138" cy="33" r="8" fill="#28445f" stroke="#fff" stroke-width="3"/></svg><p><strong>High impact · medium complexity</strong><br>Illustrative assessment</p></div>
 </div>
 <p class="note">Public industry context; these sources do not establish a utility’s call volume or potential savings.</p>
-<div class="footer"><span>Prepared by Venu Nagineni</span><span>01 / 04</span></div>
+<div class="footer"><span>Prepared by Venu Nagineni</span><span>01 / 05</span></div>
 </section>
 <section class="slide workflow-slide" aria-label="Slide 2: Current and improved workflow, selected OpenAI surface">
 <span class="eyebrow">ONE WORKFLOW · OPENAI PLATFORM AND APIs</span>
@@ -58,7 +58,7 @@
  <div class="eval-card"><strong>Repeatability &amp; cost</strong>Repeated runs, latency and model cost</div>
 </div>
 <p class="note">KPIs used: Accuracy (Deterministic and LLM as judge), Reliability, Repeatability, Cost</p>
-<div class="footer"><span>Prepared by Venu Nagineni</span><span>02 / 04</span></div>
+<div class="footer"><span>Prepared by Venu Nagineni</span><span>02 / 05</span></div>
 </section>
 <section class="slide" aria-label="Slide 3: Demonstration flow">
 <span class="eyebrow">LIVE WALKTHROUGH · SAVED LOCAL RESULTS</span>
@@ -69,8 +69,8 @@
 </div>
 <div><a class="button" href="demo.html#home=C&amp;view=invoice" target="_blank" rel="noopener">Open the demo viewer ↗</a></div>
 <p class="note">Five synthetic homes · Jan–Mar 2026 · Five-minute readings · Three fictional plans. Observed patterns support possible causes, not device diagnoses.</p>
-<p class="source">Demo evidence: <a href="data/semantic_summaries.json" target="_blank" rel="noopener">Calculated household summaries ↗</a></p>
-<div class="footer"><span>Prepared by Venu Nagineni</span><span>03 / 04</span></div>
+<p class="source">Demo evidence: <a href="../data/semantic_summaries.json" target="_blank" rel="noopener">Calculated household summaries ↗</a></p>
+<div class="footer"><span>Prepared by Venu Nagineni</span><span>03 / 05</span></div>
 </section>
 <section class="slide" aria-label="Slide 4: Business value and production considerations">
 <span class="eyebrow">BUSINESS VALUE · PRODUCTION CONSIDERATIONS</span>
@@ -80,7 +80,31 @@
  <div class="card"><h2>Production considerations</h2><p style="font-size:16px;margin-bottom:10px"><strong>Data constraints</strong><br>Validate real meter data, bills and tariffs; account for differences in peer homes and equipment.</p><p style="font-size:16px"><strong>Governance considerations</strong><br>Protect customer data, verify plan eligibility, and review drafts before delivery.</p></div>
 </div>
 <div class="evidence"><strong>Next steps:</strong><ul class="checklist" style="margin:5px 0 0"><li>Test and tune the proof of concept with real data, bills and utility plans.</li><li>Capture user feedback by launching with selected customers.</li><li>Get production buy-in from the Chief Customer Officer, Chief Information Officer and Chief Financial Officer.</li><li>Review and test the architecture for production deployment.</li></ul></div>
-<div class="footer"><span>Prepared by Venu Nagineni</span><span>04 / 04</span></div>
+<div class="footer"><span>Prepared by Venu Nagineni</span><span>04 / 05</span></div>
+</section>
+<section class="slide architecture" aria-label="Slide 5: Proposed AWS production architecture">
+<span class="eyebrow">PROPOSED PRODUCTION ARCHITECTURE · AWS + OPENAI ON BEDROCK</span>
+<h1>From meter data to billing insights.</h1>
+<p class="arch-subtitle">Asynchronous batch processing · stages execute in order; households process in parallel</p>
+<div class="arch-trigger">Amazon EventBridge Scheduler → AWS Step Functions · monthly orchestration</div>
+<div class="arch-row" aria-label="Data preparation pipeline">
+ <div class="arch-node input"><strong>Amazon S3</strong></div><span class="arch-arrow" aria-hidden="true">→</span>
+ <div class="arch-node compute"><strong>AWS Glue</strong></div><span class="arch-arrow" aria-hidden="true">→</span>
+ <div class="arch-node input"><strong>Amazon S3</strong></div>
+</div>
+<div class="arch-down">↓ &nbsp; Billing insights workflow</div>
+<div class="arch-row" aria-label="Five-stage billing insights workflow">
+ <div class="arch-node input"><strong>Amazon S3</strong></div><span class="arch-arrow" aria-hidden="true">→</span>
+ <div class="arch-node compute"><strong>AWS Batch</strong></div><span class="arch-arrow" aria-hidden="true">→</span>
+ <div class="arch-node llm"><strong>Amazon Bedrock</strong></div><span class="arch-arrow" aria-hidden="true">→</span>
+ <div class="arch-node compute"><strong>AWS Lambda</strong></div><span class="arch-arrow" aria-hidden="true">→</span>
+ <div class="arch-node mixed"><strong>Amazon Bedrock<br>AWS Lambda</strong></div>
+</div>
+<div class="arch-down">↓</div>
+<div class="arch-output"><div class="arch-node"><strong>Amazon S3 · Amazon SES</strong></div><div class="arch-node"><strong>Amazon SQS</strong></div></div>
+<p class="arch-controls"><strong>Across all stages:</strong> AWS IAM · AWS KMS · Amazon CloudWatch · staff review</p>
+<p class="arch-sources">Design references: <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference.html">Bedrock batch inference ↗</a><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference-supported.html">Supported models and Regions ↗</a><a href="https://docs.aws.amazon.com/step-functions/latest/dg/using-eventbridge-scheduler.html">Scheduled orchestration ↗</a> Select a supported model and Region; validate output before use. This architecture is proposed, not deployed.</p>
+<div class="footer"><span>Prepared by Venu Nagineni</span><span>05 / 05</span></div>
 </section>
 <nav aria-label="Slide navigation"><a href="demo.html">Demo ↗</a><button id="previous" aria-label="Previous slide">←</button><button id="next" aria-label="Next slide">→</button></nav>
 <script>

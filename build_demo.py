@@ -19,6 +19,7 @@ ROOT = Path(__file__).resolve().parent
 async def build(args):
     config = load_config()
     output = Path(args.output).resolve()
+    demo_assets = ROOT / 'demo_assets' if output == ROOT / 'output' else output / 'demo_assets'
     data_dir = output / "data"
     started = time.perf_counter()
     print("Reading generated data and calculating semantic summaries (no model calls)…", flush=True)
@@ -33,7 +34,7 @@ async def build(args):
             return {**evidence, **result}
     reports = await asyncio.gather(*(explain_home(evidence) for evidence in evidence_reports))
     # Publish only once all five reports pass validation.
-    render(config, reports, invoices, output, ROOT / "web")
+    render(config, reports, invoices, output, ROOT / "frontend_templates", demo_assets)
     (data_dir / "evidence.json").write_text(json.dumps(reports, indent=2))
     analyses = output / 'analyses'
     analyses.mkdir(exist_ok=True)
@@ -48,8 +49,8 @@ async def build(args):
         'configured_max_concurrent_homes': config.get('max_concurrent_homes', 2),
         'note': 'Byte sizes measure serialized summaries, not billed tokens. Sample/cached modes make no model calls.'
     }, indent=2))
-    print(f"Ready: {output / 'demo.html'}")
-    print(f"Slides: {output / 'slides.html'}")
+    print(f"Ready: {demo_assets / 'demo.html'}")
+    print(f"Slides: {demo_assets / 'slides.html'}")
     if review_queue:
         print(f"Completed with {len(review_queue)} home(s) requiring staff review: " + ', '.join(r['home_id'] for r in review_queue), flush=True)
         print(f"Review queue: {output / 'review_queue.json'}. Their customer emails were withheld.", flush=True)

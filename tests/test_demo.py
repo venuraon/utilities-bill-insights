@@ -277,15 +277,19 @@ class EndToEndTests(unittest.TestCase):
         for ev in self.evidence.values():
             result = asyncio.run(explain(ev, 'gpt-6-luna', 'sample', self.output / 'cache'))
             reports.append({**ev, **result})
-        render(self.config, reports, self.invoices, self.output, ROOT / 'web')
+        render(self.config, reports, self.invoices, self.output, ROOT / 'frontend_templates')
         self.assertEqual(len(list((self.output / 'invoices').glob('*.html'))), 15)
         self.assertEqual(len(list((self.output / 'emails').glob('*.html'))), 5)
-        viewer = (self.output / 'demo.html').read_text()
+        viewer = (self.output / 'demo_assets/demo.html').read_text()
         self.assertNotIn('__STYLE__', viewer)
         self.assertNotIn('__SCRIPT__', viewer)
         self.assertNotIn('__DATA__', viewer)
         self.assertNotIn('<script src=', viewer)
         self.assertNotIn('<link rel="stylesheet"', viewer)
+        separate_assets = self.output / 'presentation' / 'assets'
+        render(self.config, reports, self.invoices, self.output, ROOT / 'frontend_templates', separate_assets)
+        self.assertIn('href="../../data/semantic_summaries.json"', (separate_assets / 'slides.html').read_text())
+        self.assertIn('href="../../emails/C-2026-03.html"', (separate_assets / 'demo.html').read_text())
         for path in (self.output / 'emails').glob('*.html'):
             email = path.read_text()
             self.assertIn('SAMPLE EXPLANATION', email)
@@ -304,7 +308,7 @@ class EndToEndTests(unittest.TestCase):
         inconsistent = copy.deepcopy(reports)
         inconsistent[1]['daily'][0]['temp_f'] += 1
         with self.assertRaisesRegex(ValueError, 'identical daily weather'):
-            render(self.config, inconsistent, self.invoices, self.output / 'invalid-weather', ROOT / 'web')
+            render(self.config, inconsistent, self.invoices, self.output / 'invalid-weather', ROOT / 'frontend_templates')
 
 
 class WeatherTests(unittest.TestCase):

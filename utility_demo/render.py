@@ -2,8 +2,10 @@
 import html
 import json
 import math
+import os
 import statistics
 from pathlib import Path
+from urllib.parse import quote
 from .agents import resolve
 from .email_layout import inline_email_styles
 from .customer_insights import customer_insight
@@ -227,7 +229,7 @@ def document(title, body, style):
     return f'<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(title)}</title><style>{style}</style><body class="standalone">{body}</body></html>'
 
 
-def render(config, reports, invoices, output, web):
+def render(config, reports, invoices, output, web, demo_assets=None):
     output = Path(output)
     reference = [(r['date'], r['temp_f']) for r in reports[0]['daily']]
     if any([(r['date'], r['temp_f']) for r in report['daily']] != reference for report in reports[1:]):
@@ -253,6 +255,15 @@ def render(config, reports, invoices, output, web):
                         "resolved_explanation": resolve(report["analysis"]["explanation"], report["metrics"]) if report['analysis']['needs_review'] else insight['sentence']})
     data = json.dumps({"utility": config["utility"], "model": config["model"], "locality": config["locality"], "homes": display})
     data = data.replace("<", "\\u003c").replace("\u2028", "\\u2028").replace("\u2029", "\\u2029")
-    page = (web / "viewer.html").read_text().replace("__STYLE__", style).replace("__DATA__", data).replace("__SCRIPT__", (web / "viewer.js").read_text())
-    (output / "demo.html").write_text(page)
-    (output / "slides.html").write_text((web / "slides.html").read_text())
+    demo_assets = Path(demo_assets) if demo_assets is not None else output / "demo_assets"
+    demo_assets.mkdir(parents=True, exist_ok=True)
+    output_link = quote(Path(os.path.relpath(output, demo_assets)).as_posix(), safe='/')
+    def link_output(text):
+        for folder in ('data', 'analyses', 'emails', 'invoices'):
+            text = text.replace(f'../{folder}/', f'{output_link}/{folder}/')
+        return text
+    template = link_output((web / "viewer.html").read_text())
+    script = link_output((web / "viewer.js").read_text())
+    page = template.replace("__STYLE__", style).replace("__DATA__", data).replace("__SCRIPT__", script)
+    (demo_assets / "demo.html").write_text(page)
+    (demo_assets / "slides.html").write_text(link_output((web / "slides.html").read_text()))

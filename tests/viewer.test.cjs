@@ -4,7 +4,15 @@ const path = require('node:path');
 const vm = require('node:vm');
 const assert = require('node:assert/strict');
 const root = path.resolve(__dirname, '..');
-const html = fs.readFileSync(path.join(root, 'output/demo.html'), 'utf8');
+const html = fs.readFileSync(path.join(root, 'demo_assets/demo.html'), 'utf8');
+const assets = path.join(root, 'demo_assets');
+for (const file of ['slides.html', '4-slides-venu-nagineni.html'].filter(name => fs.existsSync(path.join(assets, name)))) {
+  const slides = fs.readFileSync(path.join(assets, file), 'utf8');
+  assert.ok(slides.includes('href="demo.html'));
+  assert.ok(slides.includes('href="../output/data/semantic_summaries.json"'));
+}
+assert.ok(fs.existsSync(path.join(assets, 'slides.html')));
+assert.ok(fs.existsSync(path.join(assets, '../output/data/semantic_summaries.json')));
 class Element {
   constructor(id = '') { this.id=id; this.dataset={}; this.attributes={}; this.children=[]; this.handlers={}; this.hidden=false; this.classList={toggle(){}}; }
   setAttribute(k,v){this.attributes[k]=v;}
@@ -28,7 +36,7 @@ const context={
   URLSearchParams, Intl
 };
 vm.createContext(context);
-vm.runInContext(fs.readFileSync(path.join(root,'web/viewer.js'),'utf8'),context);
+vm.runInContext(fs.readFileSync(path.join(root,'frontend_templates/viewer.js'),'utf8').replaceAll('../emails/', '../output/emails/').replaceAll('../analyses/', '../output/analyses/').replaceAll('../invoices/', '../output/invoices/'),context);
 assert.equal(elements.get('home-buttons').children.length,5);
 const reports=JSON.parse(data).homes;
 assert.ok(reports[0].weather_chart_html.includes('degrees Fahrenheit for all five homes'));
@@ -52,15 +60,15 @@ for(const report of reports){
   }
   assert.equal(elements.get('plan-message').innerHTML,report.plan_insight_html);
   assert.ok(elements.get('neighborhood-content').innerHTML.includes(report.neighborhood.insight));
-  assert.equal(elements.get('email-link').href,`emails/${id}-2026-03.html`);
-  assert.equal(elements.get('analysis-link').href,`analyses/${id}.json`);
+  assert.equal(elements.get('email-link').href,`../output/emails/${id}-2026-03.html`);
+  assert.equal(elements.get('analysis-link').href,`../output/analyses/${id}.json`);
   for(const tab of tabs){
     tab.click();
     assert.equal(tab.attributes['aria-selected'],'true');
     for(const other of tabs)assert.equal(elements.get(`panel-${other.dataset.tab}`).hidden,other!==tab);
   }
   for(const url of [elements.get('email-link').href,elements.get('jan-link').href,elements.get('feb-link').href]){
-    assert.ok(fs.existsSync(path.join(root,'output',url)),`Missing artifact link ${url}`);
+    assert.ok(fs.existsSync(path.join(assets,url)),`Missing artifact link ${url}`);
   }
 }
 tabs[2].handlers.keydown({key:'ArrowRight',preventDefault(){}});

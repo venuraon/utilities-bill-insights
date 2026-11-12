@@ -221,6 +221,18 @@ class FixtureAndScoringTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 load_config(path)
 
+    def test_config_accepts_combined_and_standalone_files(self):
+        config = load_config()
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / 'config.json'
+            save_json(path, {'model': 'demo-model', 'evaluation': config})
+            self.assertEqual(load_config(path), config)
+            save_json(path, config)
+            self.assertEqual(load_config(path), config)
+            save_json(path, {'evaluation': None})
+            with self.assertRaises(ValueError):
+                load_config(path)
+
 
 class BudgetTests(unittest.TestCase):
     def test_authorized_limits_preserve_the_existing_ledger(self):

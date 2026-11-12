@@ -2,8 +2,9 @@
 
 This is a standalone evaluation project. It imports nothing from `utility_demo/`,
 never runs `build_demo.py`, and never reads or writes the demo's `output/` or model
-caches. Its frozen inputs, copied contracts, configuration, dependencies, budget,
-and results are all under `evals/`. The original demo commands continue to work.
+caches. Its frozen inputs, copied contracts, dependencies, budget, and results
+are under `evals/`; its settings are in the `evaluation` section of the root
+`config.json`. The original demo commands continue to work.
 
 ## 1. Create the separate environment
 
@@ -36,14 +37,14 @@ unscored. It does not create or spend the live budget ledger.
 
 ## 3. Select the two models
 
-Edit only these two fields in `evals/config.json`:
+Choose these two fields in the `evaluation` section of the root `config.json`:
 
 - `agent_model`: the OpenAI model used for both agents in this evaluation run.
 - `judge_model`: the OpenAI model used for semantic review.
 
-Both start as `null`, so paid runs cannot start accidentally. Enter exact model
-IDs available to your API project. Changing these fields never changes the demo's
-`config.json`. The module uses the OpenAI Agents SDK with the official OpenAI
+These fields are currently configured; verify that the exact model IDs are
+available to your API project before a live run. Changing them does not change the
+demo's separate `model` setting. The module uses the OpenAI Agents SDK with the official OpenAI
 endpoint; external providers and alternate base URLs are not used.
 
 To compare another model, change `agent_model` and run again. Keep the judge and
@@ -85,7 +86,8 @@ open evals/results/comparison.html
 ```
 
 There is no required file-execution sequence beyond this single entry point.
-An alternate evaluation config can be selected using `--config path/to/config.json`.
+An alternate config can be selected using `--config path/to/config.json`; it can
+contain an `evaluation` section or just the standalone evaluation settings.
 All configs share the same budget; there is no per-config or per-run reset.
 
 With the current routing, five homes and two repetitions schedule **eighteen agent

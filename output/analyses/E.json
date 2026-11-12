@@ -7,10 +7,6 @@
       "calculated_value": "$157.72"
     },
     {
-      "metric_id": "previous_bill",
-      "calculated_value": "$140.58"
-    },
-    {
       "metric_id": "bill_change",
       "calculated_value": "+$17.14"
     },
@@ -33,11 +29,11 @@
   ],
   "peer_comparison_status": "typical",
   "recommended_plan": null,
-  "headline": "The higher bill coincided with a modest increase in daily use.",
-  "explanation": "The bill was {{bill_total}}, up from {{previous_bill}} by {{bill_change}}. March use was {{march_kwh}}, and average daily use rose {{daily_change}} versus February. The billing period was {{march_days}} days rather than {{feb_days}}, so both the longer period and higher daily use are consistent with the increase. No measured anomaly was flagged, and the usage pattern does not identify a specific cause.",
+  "headline": "Your bill increased {{bill_change}}.",
+  "explanation": "Your bill was {{bill_total}}, up {{bill_change}}. March usage was {{march_kwh}}, with daily use {{daily_change}} higher. The bill covers {{march_days}} days, compared with {{feb_days}} days for the previous period, so the totals span different-length periods. Usage was typical for the matched peer group. Weather evidence is weak and outside its training range, so it does not establish a cause. No anomaly was flagged.",
   "actions": [
-    "Review changes in occupancy, schedules, or seasonal equipment use that may explain the higher daily demand.",
-    "Monitor daily use on the next bill to see whether the increase continues."
+    "Compare daily use ({{daily_change}}) rather than bill totals across periods of different lengths.",
+    "Review routine or equipment schedule changes that may align with the usage change; the cause is unconfirmed."
   ],
   "needs_review": false
 }

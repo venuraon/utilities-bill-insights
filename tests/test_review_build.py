@@ -51,6 +51,6 @@ class ReviewBuildTests(unittest.TestCase):
             self.assertNotIn('Your bill, explained.', withheld)
             approved = (output / 'emails/A-2026-03.html').read_text()
             self.assertIn('Your March snapshot.', approved)
-            viewer = (output / 'demo.html').read_text()
+            viewer = (output / 'demo_assets/demo.html').read_text()
             self.assertIn('STAFF REVIEW REQUIRED', viewer)
             self.assertTrue((output / 'analyses/C.json').exists())

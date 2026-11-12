@@ -19,7 +19,7 @@ BASE = '''
 
 
 def inline_email_styles(source):
-    css = BASE + (Path(__file__).resolve().parents[1] / 'web' / 'email.css').read_text().split('@media')[0]
+    css = BASE + (Path(__file__).resolve().parents[1] / 'frontend_templates' / 'email.css').read_text().split('@media')[0]
     rules = [(selector.strip(), body.strip().replace('var(--line)', '#dde2e7'))
              for selectors, body in re.findall(r'([^{}]+)\{([^{}]*)\}', css)
              for selector in selectors.split(',')]

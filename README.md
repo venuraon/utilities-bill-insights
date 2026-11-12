@@ -7,10 +7,12 @@ This local demo explains monthly electricity bills for five fictional Coruscant 
 | Part | Files | What it does |
 | --- | --- | --- |
 | 1. Data generation | `generate_data.py`, `data_generation/` | Creates 90 days of five-minute readings, shared weather, peer homes, and the fictional home and plan registry in `output/data/`. Run once, or rerun only when changing the synthetic scenario. |
-| 2. Insights workflow | `build_demo.py`, `utility_demo/`, `web/` | Reads saved CSVs, calculates bills and semantic summaries, runs the two LLM roles when requested, and builds the local HTML viewer. It does not regenerate source data. |
+| 2. Insights workflow | `build_demo.py`, `utility_demo/`, `frontend_templates/` | Reads saved CSVs, calculates bills and semantic summaries, runs the two LLM roles when requested, and builds the local HTML viewer. It does not regenerate source data. |
 | 3. Evaluations | `evals/` | Runs isolated analyst, communications, and full-workflow checks from frozen fixtures. It does not import the demo modules or modify demo outputs. See [evals/README.md](evals/README.md). |
 
-`config.json` defines the fictional scenario, tariffs, thresholds, and demo model. `output/` holds generated data and presentation artifacts. `tests/` covers the data and workflow. `PLAN.md`, `take-home.md`, `problem-statement.md`, and `RECORDING.md` are project and presentation notes.
+`config.json` defines the fictional scenario, tariffs, thresholds, demo model, and a separate `evaluation` section. `demo_assets/` contains the ready-to-open viewer and slides; `frontend_templates/` contains their editable sources. `output/` holds generated data, model caches, invoices, emails, and other supporting artifacts. Keep `demo_assets/` and `output/` in the project when using the viewer's links. `tests/` covers the data and workflow. `PLAN.md`, `take-home.md`, `problem-statement.md`, and `RECORDING.md` are project and presentation notes.
+
+Within `utility_demo/`, `data.py` and `temperature.py` preserve older import paths for implementations in `data_generation/`; `evidence.py` does the same for evidence helpers in `utility_demo/data_factory.py`. These compatibility modules remain available to existing callers. The build uses `data_factory.py` for analytics, and data generation starts in `data_generation/`.
 
 ## Run the demo in order
 
@@ -19,11 +21,11 @@ Open a terminal in the project folder:
 ```sh
 python3 generate_data.py                  # Step 1: once, no API key
 python3 build_demo.py --mode sample       # Step 2: calculated demo with sample copy
-open output/demo.html
-open output/slides.html
+open demo_assets/demo.html
+open demo_assets/slides.html
 ```
 
-To use saved live agent results without model calls, run `python3 build_demo.py --mode cached` after Step 1. The workflow always recalculates the semantic summaries from the saved source data; the agents see only those concise summaries. It writes bills, evidence, standalone email previews, and the viewer under `output/`.
+To use saved live agent results without model calls, run `python3 build_demo.py --mode cached` after Step 1. The workflow always recalculates the semantic summaries from the saved source data; the agents see only those concise summaries. It writes bills, evidence, and standalone email previews under `output/`, and the viewer and generated slide copy under `demo_assets/`. With a custom `--output` directory, the viewer and slides are instead written to its `demo_assets/` subdirectory.
 
 For new live agent output, install dependencies and export your key in the same terminal:
 
@@ -33,7 +35,7 @@ source .venv/bin/activate
 python -m pip install -r requirements.txt
 export OPENAI_API_KEY="YOUR_OPENAI_API_KEY"
 python build_demo.py --mode live
-open output/demo.html
+open demo_assets/demo.html
 ```
 
 On macOS, you can enter the key without showing it or saving it in shell history:
@@ -62,14 +64,15 @@ python -m evals.run --mode offline
 open evals/results/comparison.html
 ```
 
-For paid evaluation runs, set `agent_model` and `judge_model` in `evals/config.json`, export `OPENAI_API_KEY`, then run `python -m evals.run --mode live`. The evaluation module enforces its own budget and saves JSON and HTML reports under `evals/results/`. Read [evals/README.md](evals/README.md) for the budget, stages, and scoring details.
+For paid evaluation runs, check `agent_model` and `judge_model` in the `evaluation` section of `config.json`, export `OPENAI_API_KEY`, then run `python -m evals.run --mode live`. These model settings are independent of the demo's `model` setting. The evaluation module enforces its own budget and saves JSON and HTML reports under `evals/results/`. Read [evals/README.md](evals/README.md) for the budget, stages, and scoring details.
 
 ## Inspect and verify
 
 | Artifact | Purpose |
 | --- | --- |
-| [output/demo.html](output/demo.html) | Interactive local viewer |
-| [output/slides.html](output/slides.html) | Presentation deck |
+| [demo_assets/demo.html](demo_assets/demo.html) | Interactive local viewer |
+| [demo_assets/slides.html](demo_assets/slides.html) | Presentation deck |
+| `demo_assets/4-slides-venu-nagineni.html` | Locally retained four-slide presentation |
 | [output/data/semantic_summaries.json](output/data/semantic_summaries.json) | Python evidence supplied to the analyst |
 | `output/analyses/` | Validated analyst output for each home |
 | `output/emails/` | Standalone HTML customer previews |

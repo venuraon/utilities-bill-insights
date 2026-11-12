@@ -82,7 +82,7 @@ async def execute(config, cases, prompts, manifest, mode, prices):
 
 def main():
     parser = argparse.ArgumentParser(description='Isolated utility-agent evaluations; never runs the demo builder.')
-    parser.add_argument('--config', help='Evaluation config file; default evals/config.json')
+    parser.add_argument('--config', help='Config file with an evaluation section or standalone evaluation settings; default config.json')
     parser.add_argument('--mode', choices=('offline', 'live'), default='offline')
     parser.add_argument('--dry-run', action='store_true', help='Print a plan; no model calls or result files')
     parser.add_argument('--report', action='store_true', help='Rebuild comparison from saved JSON; no model calls')
@@ -103,7 +103,7 @@ def main():
         if config['agent_model'] and config['judge_model'] and (args.mode == 'live' or args.dry_run):
             prices = load_prices([config['agent_model'], config['judge_model']])
         elif args.mode == 'live':
-            raise ValueError('Set agent_model and judge_model in evals/config.json before live evaluation')
+            raise ValueError('Set evaluation.agent_model and evaluation.judge_model in config.json before live evaluation')
         if args.dry_run:
             print(json.dumps(plan(config, cases, prompts, prices), indent=2))
             return

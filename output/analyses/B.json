@@ -31,16 +31,24 @@
       "calculated_value": "31"
     },
     {
+      "metric_id": "march_temp",
+      "calculated_value": "57.0 \u00b0F"
+    },
+    {
+      "metric_id": "feb_temp",
+      "calculated_value": "60.9 \u00b0F"
+    },
+    {
       "metric_id": "weather_residual",
       "calculated_value": "+5.1%"
     },
     {
-      "metric_id": "peer_kwh",
-      "calculated_value": "575.5 kWh"
-    },
-    {
       "metric_id": "peer_difference",
       "calculated_value": "63.8%"
+    },
+    {
+      "metric_id": "peer_kwh",
+      "calculated_value": "575.5 kWh"
     },
     {
       "metric_id": "peer_count",
@@ -64,13 +72,13 @@
     "plan_id": "tou",
     "estimated_bill": "154.03",
     "savings": "24.6",
-    "reason": "Reprices the same March usage on {{best_plan}} for {{best_plan_total}}, saving {{plan_savings}} versus the current plan; future savings may differ with usage."
+    "reason": "This option reprices identical usage at {{best_plan_total}}, saving {{plan_savings}}; that is not a forecast of future bills."
   },
-  "headline": "Higher use raised the bill; another plan costs less for this usage",
-  "explanation": "The bill was {{bill_total}}, up {{bill_change}} from {{previous_bill}}. Usage was {{march_kwh}}, and daily use rose {{daily_change}}; the billing periods were {{feb_days}} and {{march_days}} days. Usage was above the peer average of {{peer_kwh}} by {{peer_difference}} across {{peer_count}} homes. The weather model associates use with heating, but it extrapolates beyond its training range; its {{weather_residual}} residual means weather is not a confirmed cause.",
+  "headline": "Bill increased {{bill_change}} as daily use rose.",
+  "explanation": "The bill is {{bill_total}}, up {{bill_change}} from {{previous_bill}}. Usage was {{march_kwh}}; daily use rose {{daily_change}} across billing periods of {{feb_days}} and {{march_days}} days, so the longer period alone does not explain the change. Temperatures were {{march_temp}} versus {{feb_temp}}. Usage has a heating association, but the model extrapolates beyond its training range and does not prove cause; its residual is {{weather_residual}}. Usage was {{peer_difference}} above the peer average of {{peer_kwh}} across {{peer_count}} homes; peer matching is imperfect.",
   "actions": [
-    "Compare overnight schedules and equipment runtimes; the cause of the higher use is unconfirmed.",
-    "Consider {{best_plan}}; its estimate applies to the same March usage, not future behavior."
+    "Review heating schedules and operating equipment; heating may contribute, but the cause is unconfirmed.",
+    "Consider switching to {{best_plan}} for this usage; estimated cost is {{best_plan_total}} with savings of {{plan_savings}}."
   ],
   "needs_review": false
 }
